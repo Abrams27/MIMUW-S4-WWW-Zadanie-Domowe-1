@@ -1,0 +1,59 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  color: darkslategrey;
+}
+
+.quiz-ending-container {
+  display: inline-grid;
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  width: 100%;
+
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+      "quiz-ending-header-section             quiz-ending-header-section"
+      "quiz-ending-stats-container            quiz-ending-stats-container"
+      "quiz-ending-save-button                quiz-ending-save-with-stats-button"
+}
+
+
+.quiz-ending-header-section {
+  grid-area: quiz-ending-header-section;
+
+  background-color: #54aabd;
+  width: 100%;
+  padding: 16px;
+
+  color: #ffffff;
+}
+
+.quiz-header-text {
+  font-weight: bolder;
+  font-size: 200%;
+  text-align: left;
+}
+
+.quiz-ending-stats-container {
+  grid-area: quiz-ending-stats-container;
+}
+
+.quiz-ending-save-button {
+  grid-area: quiz-ending-save-button;
+}
+
+.quiz-ending-save-with-stats-button {
+  grid-area: quiz-ending-save-with-stats-button;
+}
+
+.quiz-ending-saving-button {
+  background-color: #54aabd;
+  border: 2px solid #54aabd;
+
+  color: #ffffff;
+  font-size: 100%;
+
+  padding: 16px;
+  width: 50%;
+}

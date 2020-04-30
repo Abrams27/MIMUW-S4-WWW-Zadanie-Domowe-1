@@ -1,0 +1,21 @@
+{
+  "name": "MIMUW-S4-WWW-Zadanie-Domowe-1",
+  "version": "1.0.0",
+  "description": "Zadanie domowe nr 1. z WWW",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "echo \"Error: noting to compile\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abrams27/MIMUW-S4-WWW-Zadanie-Domowe-1.git"
+  },
+  "keywords": [],
+  "author": "Marcin Abramowicz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Abrams27/MIMUW-S4-WWW-Zadanie-Domowe-1/issues"
+  },
+  "homepage": "https://github.com/Abrams27/MIMUW-S4-WWW-Zadanie-Domowe-1#readme"
+}

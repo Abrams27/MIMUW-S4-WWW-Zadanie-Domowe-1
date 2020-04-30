@@ -28,12 +28,12 @@ body {
   color: #ffffff;
 }
 
-.header-text {
+.quiz-header-text {
   font-weight: bolder;
   font-size: 500%;
 }
 
-.header-subtext {
+.quiz-header-subtext {
   font-weight: lighter;
   font-size: 120%;
 }
@@ -90,5 +90,4 @@ body {
 
   padding: 16px;
   width: 50%;
-
 }

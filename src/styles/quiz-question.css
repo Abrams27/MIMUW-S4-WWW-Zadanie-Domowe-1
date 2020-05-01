@@ -67,10 +67,10 @@ body {
 }
 
 .quiz-question-info-table-left-element {
-  width: 50%;
-  text-align: right;
-  padding: 16px;
-}
+   width: 50%;
+   text-align: right;
+   padding: 16px;
+ }
 
 .quiz-question-info-table-right-element {
   width: 50%;
@@ -94,17 +94,17 @@ body {
   width: 40%;
 }
 
-.quiz-question-navigation-section-back {
+.quiz-question-navigation-back-section {
   grid-area: quiz-question-navigation-section-back;
 }
 
 
-.quiz-question-navigation-section-stop {
+.quiz-question-navigation-stop-section {
   grid-area: quiz-question-navigation-section-stop;
 }
 
 
-.quiz-question-navigation-section-next {
+.quiz-question-navigation-next-section {
   grid-area: quiz-question-navigation-section-next;
 }
 

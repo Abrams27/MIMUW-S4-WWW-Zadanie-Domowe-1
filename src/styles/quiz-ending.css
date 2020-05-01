@@ -16,6 +16,7 @@ body {
   grid-template-areas:
       "quiz-ending-header-section             quiz-ending-header-section"
       "quiz-ending-stats-container            quiz-ending-stats-container"
+      "quiz-ending-stats-details-section      quiz-ending-stats-details-section"
       "quiz-ending-save-button                quiz-ending-save-with-stats-button"
 }
 
@@ -36,15 +37,71 @@ body {
   text-align: left;
 }
 
-.quiz-ending-stats-container {
+
+.quiz-ending-stats-section {
   grid-area: quiz-ending-stats-container;
 }
+
+.quiz-ending-stats-table {
+  width: 60%;
+  margin-left: 20%;
+  border-bottom: 2px solid #54aabd;
+}
+
+.quiz-ending-stats-table-left-element {
+  width: 50%;
+  text-align: right;
+  padding: 16px;
+}
+
+.quiz-ending-stats-table-right-element {
+  width: 50%;
+  text-align: left;
+  padding: 16px;
+  font-weight: bold;
+}
+
+
+.quiz-ending-stats-details-section {
+  grid-area: quiz-ending-stats-details-section;
+}
+
+.quiz-ending-stats-details-table {
+  width: 100%;
+}
+
+.quiz-ending-stats-details-table-left-element {
+  width: 40%;
+  text-align: right;
+  padding: 16px;
+}
+
+.quiz-ending-stats-details-table-middle-element-ok {
+  width: 20%;
+  text-align: center;
+  color: #63a149;
+  padding: 16px;
+}
+
+.quiz-ending-stats-details-table-middle-element-wa {
+  width: 20%;
+  text-align: center;
+  color: #a80014;
+  padding: 16px;
+}
+
+.quiz-ending-stats-details-table-right-element {
+  width: 40%;
+  text-align: left;
+  padding: 16px;
+}
+
 
 .quiz-ending-save-button {
   grid-area: quiz-ending-save-button;
 }
 
-.quiz-ending-save-with-stats-button {
+.quiz-ending-save-with-stats-button-section {
   grid-area: quiz-ending-save-with-stats-button;
 }
 

@@ -8,7 +8,7 @@ body {
 .quiz-body-container {
   display: inline-grid;
   grid-column-gap: 16px;
-  grid-row-gap: 16px;
+  grid-row-gap: 10%;
   width: 100%;
 
   grid-template-rows: auto;
@@ -46,15 +46,19 @@ body {
 
 .quiz-selection-select-label {
   font-size: 170%;
+  font-weight: bolder;
 }
 
 #quiz-selection-select {
   background-color: azure;
   width: 70%;
   border: 2px solid azure;
-
   color: darkslategrey;
   padding: 16px;
+
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
 }
 
 .quiz-selection-select-option {
@@ -66,17 +70,26 @@ body {
   grid-area: quizzes-scoreboard-section;
 }
 
+.quizzes-scoreboard-table {
+  width: 100%;
+}
+
+.quizzes-scoreboard-table-left-element {
+  width: 50%;
+  text-align: right;
+  padding: 16px;
+}
+
+.quizzes-scoreboard-table-right-element {
+  width: 50%;
+  text-align: left;
+  padding: 16px;
+}
+
 .quizzes-scoreboard-header {
-  width: 70%;
-  margin-left: 15%;
+  width: 100%;
+  font-size: 120%;
 }
-
-.quizzes-scoreboard-list {
-  width: 70%;
-  background-color: azure;
-  margin-left: 15%;
-}
-
 
 .start-quiz-button-section {
   grid-area: start-quiz-button-section;

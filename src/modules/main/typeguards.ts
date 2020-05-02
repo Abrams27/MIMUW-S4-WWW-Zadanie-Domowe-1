@@ -15,11 +15,6 @@ export class TypeGuardsUtils {
     return true;
   }
 
-  // public static isFieldAnArrayOfType(field: any, requiredArrayType: string): boolean {
-  //   return this.isFieldArray(field)
-  //     && this.areAllFieldsInArrayOfType(field, requiredArrayType);
-  // }
-
   public static isFieldAnArray(field: any): boolean {
     return field instanceof Array
   }

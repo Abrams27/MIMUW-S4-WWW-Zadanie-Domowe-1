@@ -5,8 +5,9 @@
   "description": "Zadanie domowe nr 1. z WWW",
   "main": "index.js",
   "scripts": {
-    "test": "npx mocha -r ts-node/register src/modules/tests/**/*.ts",
-    "compile": "echo \"Error: noting to compile\" && exit 1"
+    "test": "rm -f src/modules/**/*.js && npx mocha -r ts-node/register src/modules/tests/**/*.ts",
+    "compile": "tsc -t ES2016 src/modules/main/quiz.ts src/modules/main/quiz-ending.ts src/modules/main/quiz-question.ts",
+    "start": "npm run test & npm run compile"
   },
   "repository": {
     "type": "git",

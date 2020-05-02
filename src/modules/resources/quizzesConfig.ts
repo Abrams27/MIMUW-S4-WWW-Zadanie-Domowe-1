@@ -1,7 +1,8 @@
 import {test1} from './quizzes/test1.js'
+import {test2} from "./quizzes/test2.js";
 
 // add your tests here
-export const quizzesSet: [string] = [test1];
+export const quizzesArray: string[] = [test1, test2];
 
 // tests have to implement interfaces:
 export interface QuizQuestionWithAnswer {

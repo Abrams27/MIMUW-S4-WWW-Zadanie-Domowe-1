@@ -1,5 +1,5 @@
-export const test1: string = `{
-  "name": "test",
+export const test2: string = `{
+  "name": "test 2 xd",
   "introduction": "test test",
   "questionsWithAnswers": [
     {

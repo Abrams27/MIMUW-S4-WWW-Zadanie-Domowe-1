@@ -50,11 +50,12 @@ body {
 }
 
 #quiz-selection-select {
-  background-color: azure;
+  background-color:  #54aabd;
   width: 70%;
-  border: 2px solid azure;
-  color: darkslategrey;
+  border: 2px solid  #54aabd;
+  color: #ffffff;
   padding: 16px;
+  font-size: 170%;
 
   appearance: none;
   -moz-appearance: none;
@@ -62,7 +63,8 @@ body {
 }
 
 .quiz-selection-select-option {
-  font-size: 300px;
+  font-size: 170%;
+  text-align: center;
 }
 
 

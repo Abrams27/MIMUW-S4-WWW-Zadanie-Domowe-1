@@ -97,7 +97,7 @@ body {
   grid-area: start-quiz-button-section;
 }
 
-.start-quiz-button {
+#start-quiz-button {
   background-color: #54aabd;
   border: 2px solid #54aabd;
 

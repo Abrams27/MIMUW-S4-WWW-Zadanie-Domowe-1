@@ -1,18 +1,24 @@
 import {Quizzes} from "./quizzes.js";
-import {DocumentEditor, OptionElementBuilder, SelectEditor} from "./documentUtils.js";
+import {DocumentEditor, SelectEditor} from "./documentUtils.js";
 
 const quizzes = new Quizzes();
+const quizzesNamesArray = quizzes.getQuizzesNames();
+
+const selectEditor = new SelectEditor(document, "quiz-selection-select");
+selectEditor.addOptions(quizzesNamesArray, "quiz-selection-select-option");
 
 const documentEditor = new DocumentEditor(document);
 
-const selectEditor = new SelectEditor(document, "quiz-selection-select");
-selectEditor.addOptions(quizzes.getQuizzesNames(), "quiz-selection-select-option");
+const quizSelectionForm: HTMLFormElement = <HTMLFormElement>documentEditor.getElement("quiz-selection-form");
+quizSelectionForm.addEventListener("input", quizSelectionFormInputListener);
 
-const form = documentEditor.getElement('quiz-selection-form');
-form.addEventListener("input", xd);
+function quizSelectionFormInputListener(event) {
+  quizzes.updateChosenQuiz(event.target.value);
+}
 
-function xd(event) {
-  let nazwaCelu = event.target.name;
-  let wartoscCelu = event.target.value;
-  console.log("XDDD: " + event.target.value);
+const startQuizButton: HTMLButtonElement = <HTMLButtonElement>documentEditor.getElement("start-quiz-button");
+startQuizButton.addEventListener("click", startQuizButtonClickListener);
+
+function startQuizButtonClickListener() {
+  console.log(quizzes.getChosenQuiz());
 }

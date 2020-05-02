@@ -5,7 +5,7 @@
   "description": "Zadanie domowe nr 1. z WWW",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx mocha -r ts-node/register src/modules/tests/**/*.ts",
     "compile": "echo \"Error: noting to compile\" && exit 1"
   },
   "repository": {

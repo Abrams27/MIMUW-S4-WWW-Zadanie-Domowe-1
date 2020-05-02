@@ -12,5 +12,5 @@ export interface QuizQuestionWithAnswer {
 export interface Quiz {
   name: string,
   introduction: string,
-  questionsWithAnswers: [QuizQuestionWithAnswer]
+  questionsWithAnswers: QuizQuestionWithAnswer[]
 }

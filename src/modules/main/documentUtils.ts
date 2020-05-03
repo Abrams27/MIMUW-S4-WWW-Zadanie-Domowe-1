@@ -44,9 +44,26 @@ export class ParagraphEditor {
     this.paragraphElement = <HTMLParagraphElement>this.documentEditor.getElement(paragraphElementId);
   }
 
-  public setParagraphText(paragraphMessage: string) {
-    this.paragraphElement.innerHTML = paragraphMessage;
+  public setInnerHTML(innerHTML: string) {
+    this.paragraphElement.innerHTML = innerHTML;
   }
+
+}
+
+export class LabelEditor {
+
+  private labelElement: HTMLLabelElement;
+  private documentEditor: DocumentEditor;
+
+  public constructor(document: Document, labelElementId: string) {
+    this.documentEditor = DocumentEditor.fromDocument(document);
+    this.labelElement = <HTMLLabelElement>this.documentEditor.getElement(labelElementId);
+  }
+
+  public setInnerHTML(innerHTML: string) {
+    this.labelElement.innerHTML = innerHTML;
+  }
+
 }
 
 export class DocumentEditor {

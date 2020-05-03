@@ -45,7 +45,7 @@ body {
   grid-area: quiz-question-and-answer-section;
 }
 
-.quiz-question-answer-label {
+#quiz-question-answer-label {
   font-size: 150%;
 }
 
@@ -79,7 +79,7 @@ body {
   grid-area: quiz-question-cancel-button-section;
 }
 
-.quiz-question-cancel-button {
+#quiz-question-cancel-button {
   background-color: #54aabd;
   border: 2px solid #54aabd;
 

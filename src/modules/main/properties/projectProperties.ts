@@ -1,8 +1,8 @@
 export class ProjectProperties {
 
   public static QUIZ_HTML_FILE: string = "quiz.html";
-  public static QUIZ_QUESTION_HTML_FILE: string = "quiz-question.html";
-  public static QUIZ_ENDING_HTML_FILE: string = "quiz-ending.html";
+  public static QUIZ_QUESTION_HTML_FILE: string = "quizQuestion.html";
+  public static QUIZ_ENDING_HTML_FILE: string = "quizEnding.html";
 
   public static QUIZ_SESSION_STORAGE_KEY: string = "quiz";
 

@@ -33,6 +33,7 @@ navigationNextButton.addEventListener(ProjectProperties.CLICK_EVENT_TYPE, naviga
 
 updateButtonsVisibilityIfNeededAndUpdatePage();
 
+
 function answerInputListener(event) {
   const insertedValue = event.target.value;
 
@@ -55,7 +56,6 @@ function removeUserAnswer() {
   quizSession.removeUserAnswerForCurrentQuestion();
 }
 
-
 function cancelButtonClickListener() {
   location.href = ProjectProperties.QUIZ_HTML_FILE;
 }
@@ -75,7 +75,6 @@ function navigationNextButtonClickListener() {
   updateAnswerInputValue();
   updateButtonsVisibilityIfNeededAndUpdatePage();
 }
-
 
 function updateButtonsVisibilityIfNeededAndUpdatePage() {
   updateButtonsVisibilityIfNeeded();

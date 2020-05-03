@@ -9,11 +9,13 @@ const testValidJson: string = `{
   "questionsWithAnswers": [
     {
       "question": "test1",
-      "answer": 1
+      "answer": 1,
+      "wrongAnswerPenalty": 1
     },
     {
       "question": "test2",
-      "answer": 2
+      "answer": 2,
+      "wrongAnswerPenalty": 3
     }
   ]
 }`;
@@ -25,11 +27,13 @@ const testInvalidNameTypeJson: string = `{
   "questionsWithAnswers": [
     {
       "question": "test1",
-      "answer": 1
+      "answer": 1,
+      "wrongAnswerPenalty": 1
     },
     {
       "question": "test2",
-      "answer": 2
+      "answer": 2,
+      "wrongAnswerPenalty": 5
     }
   ]
 }`;
@@ -41,11 +45,13 @@ const testinvalidIntroductionTypeJson: string = `{
   "questionsWithAnswers": [
     {
       "question": "test1",
-      "answer": 1
+      "answer": 1,
+      "wrongAnswerPenalty": 1
     },
     {
       "question": "test2",
-      "answer": 2
+      "answer": 2,
+      "wrongAnswerPenalty": 13
     }
   ]
 }`;
@@ -57,11 +63,13 @@ const testInvalidQuestionsWithAnswersTypeJson: string = `{
   "questionsWithAnswers": [
     {
       "question": "test1",
-      "answer": "test"
+      "answer": "test",
+      "wrongAnswerPenalty": 1
     },
     {
       "question": "test2",
-      "answer": 2
+      "answer": 2,
+      "wrongAnswerPenalty": 1
     }
   ]
 }`;
@@ -73,11 +81,13 @@ const testInvalidNameFieldNameJson: string = `{
   "questionsWithAnswers": [
     {
       "question": "test1",
-      "answer": 1
+      "answer": 1,
+      "wrongAnswerPenalty": 1
     },
     {
       "question": "test2",
-      "answer": 2
+      "answer": 2,
+      "wrongAnswerPenalty": 1
     }
   ]
 }`;
@@ -89,11 +99,13 @@ const testInvalidIntroductionFieldNameJson: string = `{
   "questionsWithAnswers": [
     {
       "question": "test1",
-      "answer": 1
+      "answer": 1,
+      "wrongAnswerPenalty": 1
     },
     {
       "question": "test2",
-      "answer": 2
+      "answer": 2,
+      "wrongAnswerPenalty": 1
     }
   ]
 }`;
@@ -105,11 +117,13 @@ const testInvalidQuestionsWithAnswersFieldNameJson: string = `{
   "questdffsdnsWithAnswers": [
     {
       "question": "test1",
-      "answer": 1
+      "answer": 1,
+      "wrongAnswerPenalty": 1
     },
     {
       "question": "test2",
-      "answer": 2
+      "answer": 2,
+      "wrongAnswerPenalty": 1
     }
   ]
 }`;

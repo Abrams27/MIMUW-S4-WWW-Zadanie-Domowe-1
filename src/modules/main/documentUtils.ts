@@ -34,34 +34,18 @@ export class SelectEditor {
 
 }
 
-export class ParagraphEditor {
+export class HTMLElementEditor {
 
-  private paragraphElement: HTMLParagraphElement;
-  private documentEditor: DocumentEditor;
-
-  public constructor(document: Document, paragraphElementId: string) {
-    this.documentEditor = DocumentEditor.fromDocument(document);
-    this.paragraphElement = <HTMLParagraphElement>this.documentEditor.getElement(paragraphElementId);
-  }
-
-  public setInnerHTML(innerHTML: string) {
-    this.paragraphElement.innerHTML = innerHTML;
-  }
-
-}
-
-export class LabelEditor {
-
-  private labelElement: HTMLLabelElement;
+  private htmlElement: HTMLElement;
   private documentEditor: DocumentEditor;
 
   public constructor(document: Document, labelElementId: string) {
     this.documentEditor = DocumentEditor.fromDocument(document);
-    this.labelElement = <HTMLLabelElement>this.documentEditor.getElement(labelElementId);
+    this.htmlElement = this.documentEditor.getElement(labelElementId);
   }
 
   public setInnerHTML(innerHTML: string) {
-    this.labelElement.innerHTML = innerHTML;
+    this.htmlElement.innerHTML = innerHTML;
   }
 
 }

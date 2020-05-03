@@ -7,7 +7,8 @@ export const quizzesArray: string[] = [test1, test2];
 // tests have to implement interfaces:
 export interface QuizQuestionWithAnswerJson {
   question: string,
-  answer: number
+  answer: number,
+  wrongAnswerPenalty: number
 }
 
 export interface QuizJson {

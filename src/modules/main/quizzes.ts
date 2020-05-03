@@ -1,4 +1,4 @@
-import {QuizJson, quizzesArray} from "../resources/quizzesConfig.js";
+import {QuizJson, QuizQuestionWithAnswerJson, quizzesArray} from "../resources/quizzesConfig.js";
 import {QuizGuard} from "./typeguards.js";
 
 export class Quizzes {
@@ -79,5 +79,51 @@ export class Quiz {
 
   public getIntroduction(): string {
     return this.quizJson.introduction;
+  }
+
+  public getQuestionsListForUserAnswers(): QuizQuestionWithAnswers[] {
+    return this.quizJson
+        .questionsWithAnswers
+        .map(questionJson => QuizQuestionWithAnswers.fromQuizQuestionWithAnswerJson(questionJson));
+  }
+
+}
+
+export class QuizQuestionWithAnswers {
+
+  private readonly quizQuestionWithAnswerJson: QuizQuestionWithAnswerJson;
+  private userAnswer: number;
+  private doesUserAnsweredFlag: boolean;
+
+  private constructor(quizQuestionWithAnswerJson: QuizQuestionWithAnswerJson) {
+    this.quizQuestionWithAnswerJson = quizQuestionWithAnswerJson;
+    this.userAnswer = 0;
+    this.doesUserAnsweredFlag = false;
+  }
+
+  public static fromQuizQuestionWithAnswerJson(quizQuestionWithAnswerJson: QuizQuestionWithAnswerJson): QuizQuestionWithAnswers {
+    return new QuizQuestionWithAnswers(quizQuestionWithAnswerJson);
+  }
+
+  public updateUserAnswer(userAnswer: number) {
+    this.userAnswer = userAnswer;
+    this.doesUserAnsweredFlag = true;
+  }
+
+  public doesUserAnswered(): boolean {
+    return this.doesUserAnsweredFlag;
+  }
+
+  public isUserAnswerCorrect(): boolean {
+    return this.doesUserAnswered()
+      && this.userAnswer == this.quizQuestionWithAnswerJson.answer;
+  }
+
+  public getQuestionText(): string {
+    return this.quizQuestionWithAnswerJson.question;
+  }
+
+  public getWrongAnswerPenalty(): number {
+    return this.quizQuestionWithAnswerJson.wrongAnswerPenalty;
   }
 }

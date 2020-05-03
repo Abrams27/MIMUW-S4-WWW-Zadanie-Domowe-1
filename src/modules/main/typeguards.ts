@@ -27,12 +27,13 @@ export class TypeGuardsUtils {
 
 export class QuizQuestionWithAnswerGuard {
 
-  private static OBJECT_FIELDS: string[] = ["question", "answer"];
+  private static OBJECT_FIELDS: string[] = ["question", "answer", "wrongAnswerPenalty"];
 
   public static check(object: any): object is QuizQuestionWithAnswerJson {
     return TypeGuardsUtils.doesObjectContainsFields(object, this.OBJECT_FIELDS)
         && TypeGuardsUtils.isFieldOfType(object.question, TypeGuardsUtils.STRING_TYPE)
-        && TypeGuardsUtils.isFieldOfType(object.answer, TypeGuardsUtils.NUMBER_TYPE);
+        && TypeGuardsUtils.isFieldOfType(object.answer, TypeGuardsUtils.NUMBER_TYPE)
+        && TypeGuardsUtils.isFieldOfType(object.wrongAnswerPenalty, TypeGuardsUtils.NUMBER_TYPE);
   }
 
 }

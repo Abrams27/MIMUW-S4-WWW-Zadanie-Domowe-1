@@ -3,18 +3,20 @@ import {Quiz} from "./main/quizzes.js";
 import {Utils} from "./main/utils/utils.js";
 import {DocumentEditor} from "./main/utils/documentUtils.js";
 import {QuizSession} from "./main/quizSession.js";
-import {ActualQuizSessionPageUpdater, ActualQuizSessionPageUpdaterStopwatch} from "./main/utils/quizQuestionUtils.js";
+import {CurrentQuizSessionPageUpdater, CurrentQuizSessionPageUpdaterStopwatch} from "./main/utils/quizQuestionUtils.js";
 import {QuizQuestionProperties} from "./main/properties/quizQuestionProperties.js";
+import {QuizDetailedScoreboard} from "./main/scoreboard.js";
+
 
 const nullableQuizJson: string | null = sessionStorage.getItem(Properties.QUIZ_SESSION_STORAGE_KEY);
 const quizJson: string = Utils.getStringOrThrowError(nullableQuizJson, "invalid session storage key");
 const quiz: Quiz = Quiz.fromJson(quizJson);
 const quizSession: QuizSession = QuizSession.startWithQuiz(quiz);
 
-const actualQuizSessionPageUpdater: ActualQuizSessionPageUpdater = new ActualQuizSessionPageUpdater(document, quizSession);
+const currentQuizSessionPageUpdater: CurrentQuizSessionPageUpdater = new CurrentQuizSessionPageUpdater(document, quizSession);
 const documentEditor: DocumentEditor = DocumentEditor.fromDocument(document);
 
-ActualQuizSessionPageUpdaterStopwatch.forUpdaterAndStart(actualQuizSessionPageUpdater);
+CurrentQuizSessionPageUpdaterStopwatch.forUpdaterAndStart(currentQuizSessionPageUpdater);
 
 const answerInput: HTMLInputElement = <HTMLInputElement>documentEditor.getElement(QuizQuestionProperties.QUIZ_QUESTION_ANSWER_INPUT_ID);
 answerInput.addEventListener(Properties.INPUT_EVENT_TYPE, answerInputListener);
@@ -68,6 +70,12 @@ function navigationBackButtonClickListener() {
 }
 
 function navigationStopButtonClickListener() {
+  const quizDetaildedScoreboard: QuizDetailedScoreboard = quizSession.getDetailedScoreboard();
+  const quizDetaildedScoreboardJson: string = quizDetaildedScoreboard.toJson();
+
+  sessionStorage.removeItem(Properties.QUIZ_SESSION_STORAGE_KEY);
+  sessionStorage.setItem(Properties.QUIZ_DETAILED_SCOREBOARD_SESSION_STORAGE_KEY, quizDetaildedScoreboardJson);
+
   location.href = Properties.QUIZ_ENDING_HTML_FILE;
 }
 
@@ -79,7 +87,7 @@ function navigationNextButtonClickListener() {
 
 function updateButtonsVisibilityIfNeededAndUpdatePage() {
   updateButtonsVisibilityIfNeeded();
-  actualQuizSessionPageUpdater.loadActualQuizSessionPage();
+  currentQuizSessionPageUpdater.loadCurrentQuizSessionPage();
 }
 
 function updateButtonsVisibilityIfNeeded() {

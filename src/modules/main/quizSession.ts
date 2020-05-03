@@ -1,4 +1,5 @@
 import {Quiz, QuizQuestionWithAnswersAndTime} from "./quizzes.js";
+import {QuizDetailedScoreboard} from "./scoreboard.js";
 
 export class QuizSession {
 
@@ -105,6 +106,11 @@ export class QuizSession {
   public areAllQuestionsAnswered(): boolean {
     return this.questionsListWithUserAnswers
       .every(question => question.doesUserAnswered());
+  }
+
+  public getDetailedScoreboard(): QuizDetailedScoreboard {
+    return QuizDetailedScoreboard
+      .fromQuizQuestionWithAnswersAndTime(this.questionsListWithUserAnswers);
   }
 
 }

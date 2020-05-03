@@ -3,7 +3,7 @@ import {QuizSession} from "../quizSession.js";
 import {QuizQuestionProperties} from "../properties/quizQuestionProperties.js";
 import {Utils} from "./utils.js";
 
-export class ActualQuizSessionPageUpdater {
+export class CurrentQuizSessionPageUpdater {
 
   private quizSession: QuizSession;
   private currentPageLoadTime: number;
@@ -31,17 +31,17 @@ export class ActualQuizSessionPageUpdater {
     this.questionInfoTableTimePenaltyEditor = new HTMLElementEditor(document, QuizQuestionProperties.QUIZ_QUESTION_INFO_TABLE_TIME_PENALTY_ID);
   }
 
-  public loadActualQuizSessionPage() {
+  public loadCurrentQuizSessionPage() {
     this.updateCurrentPageTimesOnLoad();
     this.updateCurrentQuestionStopwatch(this.currentPageLoadTime);
 
-    this.loadActualQuizSessionPageQuizIntroduction();
-    this.loadActualQuizSessionPageLabelText();
+    this.loadCurrentQuizSessionPageQuizIntroduction();
+    this.loadCurrentQuizSessionPageLabelText();
 
-    this.loadActualQuizSessionPageQuestionNumber();
-    this.loadActualQuizSessionPageNumberOfAllQuestions();
+    this.loadCurrentQuizSessionPageQuestionNumber();
+    this.loadCurrentQuizSessionPageNumberOfAllQuestions();
 
-    this.loadActualQuizSessionPageWrongAnswerPenalty();
+    this.loadCurrentQuizSessionPageWrongAnswerPenalty();
   }
 
   public updateQuizSessionTime(newStopwatchValue: number) {
@@ -66,34 +66,34 @@ export class ActualQuizSessionPageUpdater {
     this.currentQuestionAnswerTimeOnLoad = this.quizSession.getUserAnswerTimeForCurrentQuestion();
   }
 
-  private loadActualQuizSessionPageQuizIntroduction() {
+  private loadCurrentQuizSessionPageQuizIntroduction() {
     const quizIntroduction: string = this.quizSession.getQuizIntroduction();
 
     this.paragraphEditor.setInnerHTML(quizIntroduction);
   }
 
-  private loadActualQuizSessionPageLabelText() {
+  private loadCurrentQuizSessionPageLabelText() {
     const actualQuizQuestionText: string = this.quizSession.getCurrentQuestionText();
     const formattedActualQuizQuestionText: string = `${actualQuizQuestionText}:</br>`;
 
     this.labelEditor.setInnerHTML(formattedActualQuizQuestionText);
   }
 
-  private loadActualQuizSessionPageQuestionNumber() {
+  private loadCurrentQuizSessionPageQuestionNumber() {
     const actualQuizQuestionNumber: number = this.quizSession.getCurrentQuestionIndex();
     const formattedActualQuizQuestionNumber: string = `${actualQuizQuestionNumber}`;
 
     this.questionInfoTableQuestionNumberEditor.setInnerHTML(formattedActualQuizQuestionNumber);
   }
 
-  private loadActualQuizSessionPageNumberOfAllQuestions() {
+  private loadCurrentQuizSessionPageNumberOfAllQuestions() {
     const actualQuizNumberOfAllQuestions: number = this.quizSession.getNumberOfAllQuestions();
     const formattedActualQuizNumberOfAllQuestions: string = `${actualQuizNumberOfAllQuestions}`;
 
     this.questionInfoTableAllQuestionsNumberEditor.setInnerHTML(formattedActualQuizNumberOfAllQuestions);
   }
 
-  private loadActualQuizSessionPageWrongAnswerPenalty() {
+  private loadCurrentQuizSessionPageWrongAnswerPenalty() {
     const actualQuizQuestionWrongAnswerPenalty: number = this.quizSession.getCurrentQuestionPenalty();
     const formattedActualQuizQuestionWrongAnswerPenalty: string = `${actualQuizQuestionWrongAnswerPenalty}`;
 
@@ -102,20 +102,20 @@ export class ActualQuizSessionPageUpdater {
 
 }
 
-export class ActualQuizSessionPageUpdaterStopwatch {
+export class CurrentQuizSessionPageUpdaterStopwatch {
 
   private static STOPWATCH_TIMEOUT_IM_MS: number = 1000;
 
-  private actualQuizSessionPageUpdater: ActualQuizSessionPageUpdater;
+  private currentQuizSessionPageUpdater: CurrentQuizSessionPageUpdater;
   private counter: number;
 
-  private constructor(actualQuizSessionPageUpdater: ActualQuizSessionPageUpdater) {
-    this.actualQuizSessionPageUpdater = actualQuizSessionPageUpdater;
+  private constructor(currentQuizSessionPageUpdater: CurrentQuizSessionPageUpdater) {
+    this.currentQuizSessionPageUpdater = currentQuizSessionPageUpdater;
     this.counter = 0;
   }
 
-  public static forUpdaterAndStart(actualQuizSessionPageUpdater: ActualQuizSessionPageUpdater): ActualQuizSessionPageUpdaterStopwatch {
-    const stopwatch: ActualQuizSessionPageUpdaterStopwatch = new ActualQuizSessionPageUpdaterStopwatch(actualQuizSessionPageUpdater);
+  public static forUpdaterAndStart(currentQuizSessionPageUpdater: CurrentQuizSessionPageUpdater): CurrentQuizSessionPageUpdaterStopwatch {
+    const stopwatch: CurrentQuizSessionPageUpdaterStopwatch = new CurrentQuizSessionPageUpdaterStopwatch(currentQuizSessionPageUpdater);
     stopwatch.start();
 
     return stopwatch;
@@ -128,14 +128,14 @@ export class ActualQuizSessionPageUpdaterStopwatch {
   private count() {
     this.counter++;
 
-    this.actualQuizSessionPageUpdater.updateQuizSessionTime(this.counter);
-    this.actualQuizSessionPageUpdater.updateCurrentQuestionStopwatch(this.counter);
+    this.currentQuizSessionPageUpdater.updateQuizSessionTime(this.counter);
+    this.currentQuizSessionPageUpdater.updateCurrentQuestionStopwatch(this.counter);
 
     this.timer();
   }
 
   private timer() {
-    setTimeout(() => this.count(), ActualQuizSessionPageUpdaterStopwatch.STOPWATCH_TIMEOUT_IM_MS);
+    setTimeout(() => this.count(), CurrentQuizSessionPageUpdaterStopwatch.STOPWATCH_TIMEOUT_IM_MS);
   }
 
 }

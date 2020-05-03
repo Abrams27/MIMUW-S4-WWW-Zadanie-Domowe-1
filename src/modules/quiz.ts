@@ -1,4 +1,4 @@
-import {Quizzes} from "./main/quizzes.js";
+import {Quiz, Quizzes} from "./main/quizzes.js";
 import {DocumentEditor, SelectEditor} from "./main/utils/documentUtils.js";
 import {Properties} from "./main/properties/properties.js";
 import {QuizProperties} from "./main/properties/quizProperties.js";
@@ -24,8 +24,9 @@ const startQuizButton: HTMLButtonElement = <HTMLButtonElement>documentEditor.get
 startQuizButton.addEventListener(Properties.CLICK_EVENT_TYPE, startQuizButtonClickListener);
 
 function startQuizButtonClickListener() {
-  const chosenQuiz = quizzes.getChosenQuiz();
+  const chosenQuiz: Quiz = quizzes.getChosenQuiz();
+  const chosenQuizJson: string = chosenQuiz.toJson();
 
-  sessionStorage.setItem(Properties.QUIZ_SESSION_STORAGE_KEY, chosenQuiz.toJson());
+  sessionStorage.setItem(Properties.QUIZ_SESSION_STORAGE_KEY, chosenQuizJson);
   location.href = Properties.QUIZ_QUESTION_HTML_FILE;
 }

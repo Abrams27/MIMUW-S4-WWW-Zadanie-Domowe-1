@@ -1,23 +1,18 @@
 import {Quizzes} from "./quizzes.js";
 import {DocumentEditor, SelectEditor} from "./documentUtils.js";
-import {Properties} from "./properties.js";
-
-const QUIZ_SELECTION_SELECT_ID: string = "quiz-selection-select";
-const QUIZ_SELECTION_SELECT_OPTION_ID: string = "quiz-selection-select";
-const QUIZ_SELECTION_FORM_ID: string = "quiz-selection-form";
-const START_QUIZ_BUTTON_ID: string = "start-quiz-button";
-
+import {ProjectProperties} from "./properties/projectProperties.js";
+import {QuizProperties} from "./properties/quizProperties.js";
 
 const quizzes: Quizzes = new Quizzes();
 const quizzesNamesArray: string[] = quizzes.getQuizzesNames();
 
-const selectEditor: SelectEditor = new SelectEditor(document, QUIZ_SELECTION_SELECT_ID);
-selectEditor.addOptions(quizzesNamesArray, QUIZ_SELECTION_SELECT_OPTION_ID);
+const selectEditor: SelectEditor = new SelectEditor(document, QuizProperties.QUIZ_SELECTION_SELECT_ID);
+selectEditor.addOptions(quizzesNamesArray, QuizProperties.QUIZ_SELECTION_SELECT_OPTION_ID);
 
 const documentEditor: DocumentEditor = DocumentEditor.fromDocument(document);
 
-const quizSelectionForm: HTMLFormElement = <HTMLFormElement>documentEditor.getElement(QUIZ_SELECTION_FORM_ID);
-quizSelectionForm.addEventListener(Properties.INPUT_TAG, quizSelectionFormInputListener);
+const quizSelectionForm: HTMLFormElement = <HTMLFormElement>documentEditor.getElement(QuizProperties.QUIZ_SELECTION_FORM_ID);
+quizSelectionForm.addEventListener(ProjectProperties.INPUT_TAG, quizSelectionFormInputListener);
 
 function quizSelectionFormInputListener(event) {
   const chosenQuizName = event.target.value;
@@ -25,12 +20,12 @@ function quizSelectionFormInputListener(event) {
   quizzes.updateChosenQuiz(chosenQuizName);
 }
 
-const startQuizButton: HTMLButtonElement = <HTMLButtonElement>documentEditor.getElement(START_QUIZ_BUTTON_ID);
-startQuizButton.addEventListener(Properties.CLICK_EVENT_TYPE, startQuizButtonClickListener);
+const startQuizButton: HTMLButtonElement = <HTMLButtonElement>documentEditor.getElement(QuizProperties.START_QUIZ_BUTTON_ID);
+startQuizButton.addEventListener(ProjectProperties.CLICK_EVENT_TYPE, startQuizButtonClickListener);
 
 function startQuizButtonClickListener() {
   const chosenQuiz = quizzes.getChosenQuiz();
 
-  sessionStorage.setItem(Properties.QUIZ_SESSION_STORAGE_KEY, chosenQuiz.toJson());
-  location.href = Properties.QUIZ_QUESTION_HTML_FILE;
+  sessionStorage.setItem(ProjectProperties.QUIZ_SESSION_STORAGE_KEY, chosenQuiz.toJson());
+  location.href = ProjectProperties.QUIZ_QUESTION_HTML_FILE;
 }

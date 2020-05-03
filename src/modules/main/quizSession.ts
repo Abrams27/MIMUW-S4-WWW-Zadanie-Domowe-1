@@ -16,6 +16,10 @@ export class QuizSession {
     return new QuizSession(quiz);
   }
 
+  public getQuizIntroduction(): string {
+    return this.quiz.getIntroduction();
+  }
+
   public loadNextQuestion() {
     if (this.hasNextQuestion()) {
       this.quizIndex++;
@@ -57,7 +61,6 @@ export class QuizSession {
   private getActualQuestion(): QuizQuestionWithAnswers {
     return this.questionsListWithUserAnswers[this.quizIndex];
   }
-
 
 }
 

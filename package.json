@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "rm -f src/modules/**/*.js && npx mocha -r ts-node/register src/modules/tests/**/*.ts",
-    "compile": "tsc -t ES2016 src/modules/main/quiz.ts src/modules/main/quiz-ending.ts src/modules/main/quiz-question.ts",
+    "compile": "tsc -t ES2016 src/modules/main/quiz.ts src/modules/main/quizEnding.ts src/modules/main/quizQuestion.ts",
     "start": "npm run test & npm run compile"
   },
   "repository": {

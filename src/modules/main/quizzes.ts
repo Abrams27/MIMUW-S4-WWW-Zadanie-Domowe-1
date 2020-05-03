@@ -110,6 +110,10 @@ export class QuizQuestionWithAnswers {
     this.doesUserAnsweredFlag = true;
   }
 
+  public removeUserAnswer() {
+    this.doesUserAnsweredFlag = false;
+  }
+
   public doesUserAnswered(): boolean {
     return this.doesUserAnsweredFlag;
   }
@@ -125,5 +129,9 @@ export class QuizQuestionWithAnswers {
 
   public getWrongAnswerPenalty(): number {
     return this.quizQuestionWithAnswerJson.wrongAnswerPenalty;
+  }
+
+  public getUserAnswer(): number {
+    return this.userAnswer;
   }
 }

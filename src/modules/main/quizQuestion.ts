@@ -15,6 +15,10 @@ const quizSession: QuizSession = QuizSession.startWithQuiz(quiz);
 const actualQuizSessionPageUpdater: ActualQuizSessionPageUpdater = new ActualQuizSessionPageUpdater(document, quizSession);
 const documentEditor: DocumentEditor = DocumentEditor.fromDocument(document);
 
+const answerInput: HTMLInputElement = <HTMLInputElement>documentEditor.getElement(QuizQuestionProperties.QUIZ_QUESTION_ANSWER_INPUT_ID);
+answerInput.addEventListener(ProjectProperties.INPUT_EVENT_TYPE, answerInputListener);
+answerInput.placeholder = "podaj odpowiedź";
+
 const cancelButton: HTMLButtonElement = <HTMLButtonElement>documentEditor.getElement(QuizQuestionProperties.QUIZ_QUESTION_CANCEL_BUTTON_ID);
 cancelButton.addEventListener(ProjectProperties.CLICK_EVENT_TYPE, cancelButtonClickListener);
 
@@ -29,6 +33,28 @@ navigationNextButton.addEventListener(ProjectProperties.CLICK_EVENT_TYPE, naviga
 
 updateButtonsVisibilityIfNeededAndUpdatePage();
 
+function answerInputListener(event) {
+  const insertedValue = event.target.value;
+
+  if (insertedValue.length > 0) {
+    updateUserAnswer(insertedValue);
+  } else {
+    removeUserAnswer();
+  }
+
+  updateButtonsVisibilityIfNeededAndUpdatePage();
+}
+
+function updateUserAnswer(userAnswer: string) {
+  const parsedUserAnswer = Number(userAnswer);
+
+  quizSession.updateUserAnswerForCurrentQuestion(parsedUserAnswer);
+}
+
+function removeUserAnswer() {
+  quizSession.removeUserAnswerForCurrentQuestion();
+}
+
 
 function cancelButtonClickListener() {
   console.log("XDDDDD");
@@ -36,6 +62,7 @@ function cancelButtonClickListener() {
 
 function navigationBackButtonClickListener() {
   quizSession.loadPreviousQuestion();
+  updateAnswerInputValue();
   updateButtonsVisibilityIfNeededAndUpdatePage();
 }
 
@@ -45,6 +72,7 @@ function navigationStopButtonClickListener() {
 
 function navigationNextButtonClickListener() {
   quizSession.loadNextQuestion();
+  updateAnswerInputValue();
   updateButtonsVisibilityIfNeededAndUpdatePage();
 }
 
@@ -77,9 +105,21 @@ function updateNavigationNextButtonVisibilityIfNeeded() {
 }
 
 function updateNavigationStopButtonVisibilityIfNeeded() {
-  // if (quizSession.()) {
-  //   navigationNextButton.removeAttribute(ProjectProperties.DISABLED_ATTRIBUTE);
-  // } else {
-  //   navigationNextButton.setAttribute(ProjectProperties.DISABLED_ATTRIBUTE, ProjectProperties.TRUE);
-  // }
+  if (quizSession.areAllQuestionsAnswered()) {
+    navigationStopButton.removeAttribute(ProjectProperties.DISABLED_ATTRIBUTE);
+  } else {
+    navigationStopButton.setAttribute(ProjectProperties.DISABLED_ATTRIBUTE, ProjectProperties.TRUE);
+  }
+}
+
+function updateAnswerInputValue() {
+  answerInput.value = getUserAnswerForCurrentQuestionOrEmpty();
+}
+
+function getUserAnswerForCurrentQuestionOrEmpty(): string {
+  if (quizSession.doesUserAnsweredForCurrentQuestion()) {
+    return String(quizSession.getUserAnswerForCurrentQuestion());
+  } else {
+    return "";
+  }
 }

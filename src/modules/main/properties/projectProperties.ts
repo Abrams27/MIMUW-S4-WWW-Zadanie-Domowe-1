@@ -9,6 +9,7 @@ export class ProjectProperties {
   public static INPUT_TAG: string = "input";
 
   public static CLICK_EVENT_TYPE: string = "click";
+  public static INPUT_EVENT_TYPE: string = "input";
 
   public static TRUE: string = "true";
 

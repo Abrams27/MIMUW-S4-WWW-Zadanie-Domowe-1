@@ -7,6 +7,7 @@ export class QuizQuestionProperties {
 
   public static QUIZ_QUESTION_INTRODUCTION_PARAGRAPH_ID: string = "quiz-question-introduction-paragraph";
   public static QUIZ_QUESTION_ANSWER_LABEL_ID: string = "quiz-question-answer-label";
+  public static QUIZ_QUESTION_ANSWER_INPUT_ID: string = "quiz-question-answer-input";
   public static QUIZ_QUESTION_INFO_TABLE_QUESTION_NUMBER_ID: string = "quiz-question-info-table-question-number";
   public static QUIZ_QUESTION_INFO_TABLE_ALL_QUESTIONS_NUMBER_ID: string = "quiz-question-info-table-all-questions-number";
   public static QUIZ_QUESTION_INFO_TABLE_QUIZ_PAGE_TIME_ID: string = "quiz-question-info-table-quiz-page-time";

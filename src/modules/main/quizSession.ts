@@ -62,10 +62,31 @@ export class QuizSession {
     return this.questionsListWithUserAnswers[this.quizIndex];
   }
 
-}
+  public updateUserAnswerForCurrentQuestion(userAnswer: number) {
+    this.getActualQuestion()
+      .updateUserAnswer(userAnswer);
+  }
 
-class QuizSessionPage {
-  
+  public doesUserAnsweredForCurrentQuestion(): boolean {
+    return this.getActualQuestion()
+      .doesUserAnswered();
+  }
+
+  public getUserAnswerForCurrentQuestion(): number {
+    return this.getActualQuestion()
+      .getUserAnswer();
+  }
+
+  public removeUserAnswerForCurrentQuestion() {
+    this.getActualQuestion()
+      .removeUserAnswer();
+  }
+
+  public areAllQuestionsAnswered(): boolean {
+    return this.questionsListWithUserAnswers
+      .every(question => question.doesUserAnswered());
+  }
+
 }
 
 export class Stopwatch {

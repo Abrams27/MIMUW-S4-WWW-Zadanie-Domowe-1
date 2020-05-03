@@ -51,6 +51,8 @@ body {
 
 #quiz-question-answer-input {
   width: 30%;
+  font-size: 200%;
+  text-align: center;
 }
 
 .quiz-question-info-section {

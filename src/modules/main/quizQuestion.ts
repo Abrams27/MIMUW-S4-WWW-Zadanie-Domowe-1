@@ -1,11 +1,10 @@
 import {ProjectProperties} from "./properties/projectProperties.js";
 import {Quiz} from "./quizzes.js";
-import {Utils} from "./utils.js";
+import {Utils} from "./utils/utils.js";
 import {DocumentEditor} from "./documentUtils.js";
-import {QuizSession, Stopwatch} from "./quizSession.js";
-import {ActualQuizSessionPageUpdater} from "./utils/quizQuestionModules.js";
+import {QuizSession} from "./quizSession.js";
+import {ActualQuizSessionPageUpdater, ActualQuizSessionPageUpdaterStopwatch} from "./utils/quizQuestionUtils.js";
 import {QuizQuestionProperties} from "./properties/quizQuestionProperties.js";
-
 
 const nullableQuizJson: string | null = sessionStorage.getItem(ProjectProperties.QUIZ_SESSION_STORAGE_KEY);
 const quizJson: string = Utils.getStringOrThrowError(nullableQuizJson, "invalid session storage key");
@@ -14,6 +13,8 @@ const quizSession: QuizSession = QuizSession.startWithQuiz(quiz);
 
 const actualQuizSessionPageUpdater: ActualQuizSessionPageUpdater = new ActualQuizSessionPageUpdater(document, quizSession);
 const documentEditor: DocumentEditor = DocumentEditor.fromDocument(document);
+
+ActualQuizSessionPageUpdaterStopwatch.forUpdaterAndStart(actualQuizSessionPageUpdater);
 
 const answerInput: HTMLInputElement = <HTMLInputElement>documentEditor.getElement(QuizQuestionProperties.QUIZ_QUESTION_ANSWER_INPUT_ID);
 answerInput.addEventListener(ProjectProperties.INPUT_EVENT_TYPE, answerInputListener);

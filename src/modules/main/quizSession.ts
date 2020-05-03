@@ -1,15 +1,17 @@
-import {Quiz, QuizQuestionWithAnswers} from "./quizzes.js";
+import {Quiz, QuizQuestionWithAnswersAndTime} from "./quizzes.js";
 
 export class QuizSession {
 
   private quiz: Quiz;
-  private questionsListWithUserAnswers: QuizQuestionWithAnswers[];
+  private readonly questionsListWithUserAnswers: QuizQuestionWithAnswersAndTime[];
   private quizIndex: number;
+  private sessionAnswersTime: number;
 
   private constructor(quiz: Quiz) {
     this.quiz = quiz;
     this.questionsListWithUserAnswers = quiz.getQuestionsListForUserAnswers();
     this.quizIndex = 0;
+    this.sessionAnswersTime = 0;
   }
 
   public static startWithQuiz(quiz: Quiz): QuizSession {
@@ -18,6 +20,24 @@ export class QuizSession {
 
   public getQuizIntroduction(): string {
     return this.quiz.getIntroduction();
+  }
+
+  public updateSessionAnswersTime(answersTime: number) {
+    this.sessionAnswersTime = answersTime;
+  }
+
+  public getSessionAnswersTime() {
+    return this.sessionAnswersTime;
+  }
+
+  public updateUserAnswerTimeForCurrentQuestion(answerTime: number) {
+    this.getCurrentQuestion()
+      .updateUserAnswerTime(answerTime);
+  }
+
+  public getUserAnswerTimeForCurrentQuestion(): number {
+    return this.getCurrentQuestion()
+      .getUserAnswerTime();
   }
 
   public loadNextQuestion() {
@@ -40,7 +60,7 @@ export class QuizSession {
     return this.quizIndex - 1 >= 0;
   }
 
-  public getActualQuestionIndex(): number {
+  public getCurrentQuestionIndex(): number {
     return this.quizIndex + 1;
   }
 
@@ -48,37 +68,37 @@ export class QuizSession {
     return this.questionsListWithUserAnswers.length;
   }
 
-  public getActualQuestionPenalty(): number {
-    return this.getActualQuestion()
+  public getCurrentQuestionPenalty(): number {
+    return this.getCurrentQuestion()
       .getWrongAnswerPenalty();
   }
 
-  public getActualQuestionText(): string {
-    return this.getActualQuestion()
+  public getCurrentQuestionText(): string {
+    return this.getCurrentQuestion()
       .getQuestionText();
   }
 
-  private getActualQuestion(): QuizQuestionWithAnswers {
+  private getCurrentQuestion(): QuizQuestionWithAnswersAndTime {
     return this.questionsListWithUserAnswers[this.quizIndex];
   }
 
   public updateUserAnswerForCurrentQuestion(userAnswer: number) {
-    this.getActualQuestion()
+    this.getCurrentQuestion()
       .updateUserAnswer(userAnswer);
   }
 
   public doesUserAnsweredForCurrentQuestion(): boolean {
-    return this.getActualQuestion()
+    return this.getCurrentQuestion()
       .doesUserAnswered();
   }
 
   public getUserAnswerForCurrentQuestion(): number {
-    return this.getActualQuestion()
+    return this.getCurrentQuestion()
       .getUserAnswer();
   }
 
   public removeUserAnswerForCurrentQuestion() {
-    this.getActualQuestion()
+    this.getCurrentQuestion()
       .removeUserAnswer();
   }
 
@@ -87,37 +107,4 @@ export class QuizSession {
       .every(question => question.doesUserAnswered());
   }
 
-}
-
-export class Stopwatch {
-
-  private counter: number;
-
-  public constructor() {
-    this.counter = 0;
-  }
-
-  public start(everySecondFunction: () => void) {
-    this.timer(everySecondFunction);
-  }
-
-  private count(everySecondFunction: () => void) {
-    this.counter++;
-
-    everySecondFunction();
-
-    this.timer(everySecondFunction);
-  }
-
-  private timer(everySecondFunction: () => void) {
-    setTimeout(() => this.count(everySecondFunction), 1000);
-  }
-
-  public stop() {
-
-  }
-
-  private wait(delay: number): Promise<{}> {
-    return new Promise(lambda => setTimeout(lambda, delay));
-  }
 }

@@ -81,28 +81,30 @@ export class Quiz {
     return this.quizJson.introduction;
   }
 
-  public getQuestionsListForUserAnswers(): QuizQuestionWithAnswers[] {
+  public getQuestionsListForUserAnswers(): QuizQuestionWithAnswersAndTime[] {
     return this.quizJson
         .questionsWithAnswers
-        .map(questionJson => QuizQuestionWithAnswers.fromQuizQuestionWithAnswerJson(questionJson));
+        .map(questionJson => QuizQuestionWithAnswersAndTime.fromQuizQuestionWithAnswerJson(questionJson));
   }
 
 }
 
-export class QuizQuestionWithAnswers {
+export class QuizQuestionWithAnswersAndTime {
 
   private readonly quizQuestionWithAnswerJson: QuizQuestionWithAnswerJson;
   private userAnswer: number;
   private doesUserAnsweredFlag: boolean;
+  private answerTime: number;
 
   private constructor(quizQuestionWithAnswerJson: QuizQuestionWithAnswerJson) {
     this.quizQuestionWithAnswerJson = quizQuestionWithAnswerJson;
     this.userAnswer = 0;
     this.doesUserAnsweredFlag = false;
+    this.answerTime = 0;
   }
 
-  public static fromQuizQuestionWithAnswerJson(quizQuestionWithAnswerJson: QuizQuestionWithAnswerJson): QuizQuestionWithAnswers {
-    return new QuizQuestionWithAnswers(quizQuestionWithAnswerJson);
+  public static fromQuizQuestionWithAnswerJson(quizQuestionWithAnswerJson: QuizQuestionWithAnswerJson): QuizQuestionWithAnswersAndTime {
+    return new QuizQuestionWithAnswersAndTime(quizQuestionWithAnswerJson);
   }
 
   public updateUserAnswer(userAnswer: number) {
@@ -112,6 +114,14 @@ export class QuizQuestionWithAnswers {
 
   public removeUserAnswer() {
     this.doesUserAnsweredFlag = false;
+  }
+
+  public updateUserAnswerTime(answerTime: number) {
+    this.answerTime = answerTime;
+  }
+
+  public getUserAnswerTime(): number {
+    return this.answerTime;
   }
 
   public doesUserAnswered(): boolean {

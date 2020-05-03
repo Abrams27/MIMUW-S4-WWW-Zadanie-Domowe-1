@@ -17,7 +17,7 @@ const documentEditor: DocumentEditor = DocumentEditor.fromDocument(document);
 
 const answerInput: HTMLInputElement = <HTMLInputElement>documentEditor.getElement(QuizQuestionProperties.QUIZ_QUESTION_ANSWER_INPUT_ID);
 answerInput.addEventListener(ProjectProperties.INPUT_EVENT_TYPE, answerInputListener);
-answerInput.placeholder = "podaj odpowiedź";
+answerInput.placeholder = QuizQuestionProperties.QUIZ_QUESTION_ANSWER_INPUT_PLACEHOLDER;
 
 const cancelButton: HTMLButtonElement = <HTMLButtonElement>documentEditor.getElement(QuizQuestionProperties.QUIZ_QUESTION_CANCEL_BUTTON_ID);
 cancelButton.addEventListener(ProjectProperties.CLICK_EVENT_TYPE, cancelButtonClickListener);
@@ -57,7 +57,7 @@ function removeUserAnswer() {
 
 
 function cancelButtonClickListener() {
-  console.log("XDDDDD");
+  location.href = ProjectProperties.QUIZ_HTML_FILE;
 }
 
 function navigationBackButtonClickListener() {
@@ -67,7 +67,7 @@ function navigationBackButtonClickListener() {
 }
 
 function navigationStopButtonClickListener() {
-  console.log("stop");
+  location.href = ProjectProperties.QUIZ_ENDING_HTML_FILE;
 }
 
 function navigationNextButtonClickListener() {

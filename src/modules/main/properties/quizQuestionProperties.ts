@@ -13,4 +13,6 @@ export class QuizQuestionProperties {
   public static QUIZ_QUESTION_INFO_TABLE_QUIZ_PAGE_TIME_ID: string = "quiz-question-info-table-quiz-page-time";
   public static QUIZ_QUESTION_INFO_TABLE_QUIZ_TIME_ID: string = "quiz-question-info-table-quiz-time";
   public static QUIZ_QUESTION_INFO_TABLE_TIME_PENALTY_ID: string = "quiz-question-info-table-time-penalty";
+
+  public static QUIZ_QUESTION_ANSWER_INPUT_PLACEHOLDER: string = "podaj odpowiedź";
 }

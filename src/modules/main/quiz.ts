@@ -1,24 +1,36 @@
 import {Quizzes} from "./quizzes.js";
 import {DocumentEditor, SelectEditor} from "./documentUtils.js";
+import {Properties} from "./properties.js";
 
-const quizzes = new Quizzes();
-const quizzesNamesArray = quizzes.getQuizzesNames();
+const QUIZ_SELECTION_SELECT_ID = "quiz-selection-select";
+const QUIZ_SELECTION_SELECT_OPTION_ID = "quiz-selection-select";
+const QUIZ_SELECTION_FORM_ID = "quiz-selection-form";
+const START_QUIZ_BUTTON_ID = "start-quiz-button";
 
-const selectEditor = new SelectEditor(document, "quiz-selection-select");
-selectEditor.addOptions(quizzesNamesArray, "quiz-selection-select-option");
 
-const documentEditor = new DocumentEditor(document);
+const quizzes: Quizzes = new Quizzes();
+const quizzesNamesArray: string[] = quizzes.getQuizzesNames();
 
-const quizSelectionForm: HTMLFormElement = <HTMLFormElement>documentEditor.getElement("quiz-selection-form");
-quizSelectionForm.addEventListener("input", quizSelectionFormInputListener);
+const selectEditor: SelectEditor = new SelectEditor(document, QUIZ_SELECTION_SELECT_ID);
+selectEditor.addOptions(quizzesNamesArray, QUIZ_SELECTION_SELECT_OPTION_ID);
+
+const documentEditor: DocumentEditor = new DocumentEditor(document);
+
+const quizSelectionForm: HTMLFormElement = <HTMLFormElement>documentEditor.getElement(QUIZ_SELECTION_FORM_ID);
+quizSelectionForm.addEventListener(Properties.INPUT_TAG, quizSelectionFormInputListener);
 
 function quizSelectionFormInputListener(event) {
-  quizzes.updateChosenQuiz(event.target.value);
+  const chosenQuizName = event.target.value;
+
+  quizzes.updateChosenQuiz(chosenQuizName);
 }
 
-const startQuizButton: HTMLButtonElement = <HTMLButtonElement>documentEditor.getElement("start-quiz-button");
-startQuizButton.addEventListener("click", startQuizButtonClickListener);
+const startQuizButton: HTMLButtonElement = <HTMLButtonElement>documentEditor.getElement(START_QUIZ_BUTTON_ID);
+startQuizButton.addEventListener(Properties.CLICK_EVENT_TYPE, startQuizButtonClickListener);
 
 function startQuizButtonClickListener() {
-  console.log(quizzes.getChosenQuiz());
+  const chosenQuiz = quizzes.getChosenQuiz();
+
+  sessionStorage.setItem(Properties.QUIZ_SESSION_STORAGE_KEY, chosenQuiz.toJson());
+  location.href = Properties.QUIZ_QUESTION_HTML_FILE;
 }

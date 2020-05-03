@@ -5,13 +5,14 @@ import {test2} from "./quizzes/test2.js";
 export const quizzesArray: string[] = [test1, test2];
 
 // tests have to implement interfaces:
-export interface QuizQuestionWithAnswer {
+export interface QuizQuestionWithAnswerJson {
   question: string,
   answer: number
 }
 
-export interface Quiz {
+export interface QuizJson {
   name: string,
   introduction: string,
-  questionsWithAnswers: QuizQuestionWithAnswer[]
+  questionsWithAnswers: QuizQuestionWithAnswerJson[]
 }
+

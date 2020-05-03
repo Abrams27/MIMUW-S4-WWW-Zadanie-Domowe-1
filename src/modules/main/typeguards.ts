@@ -1,4 +1,4 @@
-import {Quiz, QuizQuestionWithAnswer} from '../resources/quizzesConfig.js';
+import {QuizJson, QuizQuestionWithAnswerJson} from '../resources/quizzesConfig.js';
 
 export class TypeGuardsUtils {
 
@@ -26,9 +26,10 @@ export class TypeGuardsUtils {
 }
 
 export class QuizQuestionWithAnswerGuard {
+
   private static OBJECT_FIELDS: string[] = ["question", "answer"];
 
-  public static check(object: any): object is QuizQuestionWithAnswer {
+  public static check(object: any): object is QuizQuestionWithAnswerJson {
     return TypeGuardsUtils.doesObjectContainsFields(object, this.OBJECT_FIELDS)
         && TypeGuardsUtils.isFieldOfType(object.question, TypeGuardsUtils.STRING_TYPE)
         && TypeGuardsUtils.isFieldOfType(object.answer, TypeGuardsUtils.NUMBER_TYPE);
@@ -37,9 +38,10 @@ export class QuizQuestionWithAnswerGuard {
 }
 
 export class QuizGuard {
+
   private static OBJECT_FIELDS: string[] = ["name", "introduction", "questionsWithAnswers"];
 
-  public static check(object: any): object is Quiz {
+  public static check(object: any): object is QuizJson {
     return TypeGuardsUtils.doesObjectContainsFields(object, this.OBJECT_FIELDS)
         && TypeGuardsUtils.isFieldOfType(object.name, TypeGuardsUtils.STRING_TYPE)
         && TypeGuardsUtils.isFieldOfType(object.introduction, TypeGuardsUtils.STRING_TYPE)

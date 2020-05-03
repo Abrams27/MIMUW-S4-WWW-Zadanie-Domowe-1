@@ -30,7 +30,6 @@ export class SelectEditor {
     .build();
   }
 
-
 }
 
 export class DocumentEditor {
@@ -91,4 +90,5 @@ export class OptionElementBuilder {
   public build(): HTMLOptionElement {
     return this.resultOptionElement;
   }
+
 }

@@ -2,10 +2,10 @@ import {Quizzes} from "./quizzes.js";
 import {DocumentEditor, SelectEditor} from "./documentUtils.js";
 import {Properties} from "./properties.js";
 
-const QUIZ_SELECTION_SELECT_ID = "quiz-selection-select";
-const QUIZ_SELECTION_SELECT_OPTION_ID = "quiz-selection-select";
-const QUIZ_SELECTION_FORM_ID = "quiz-selection-form";
-const START_QUIZ_BUTTON_ID = "start-quiz-button";
+const QUIZ_SELECTION_SELECT_ID: string = "quiz-selection-select";
+const QUIZ_SELECTION_SELECT_OPTION_ID: string = "quiz-selection-select";
+const QUIZ_SELECTION_FORM_ID: string = "quiz-selection-form";
+const START_QUIZ_BUTTON_ID: string = "start-quiz-button";
 
 
 const quizzes: Quizzes = new Quizzes();
@@ -14,7 +14,7 @@ const quizzesNamesArray: string[] = quizzes.getQuizzesNames();
 const selectEditor: SelectEditor = new SelectEditor(document, QUIZ_SELECTION_SELECT_ID);
 selectEditor.addOptions(quizzesNamesArray, QUIZ_SELECTION_SELECT_OPTION_ID);
 
-const documentEditor: DocumentEditor = new DocumentEditor(document);
+const documentEditor: DocumentEditor = DocumentEditor.fromDocument(document);
 
 const quizSelectionForm: HTMLFormElement = <HTMLFormElement>documentEditor.getElement(QUIZ_SELECTION_FORM_ID);
 quizSelectionForm.addEventListener(Properties.INPUT_TAG, quizSelectionFormInputListener);

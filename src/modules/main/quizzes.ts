@@ -77,4 +77,7 @@ export class Quiz {
     return this.getName() == name;
   }
 
+  public getIntroduction(): string {
+    return this.quizJson.introduction;
+  }
 }

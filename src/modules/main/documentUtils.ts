@@ -1,3 +1,4 @@
+import {Utils} from "./utils.js";
 
 export class SelectEditor {
 
@@ -5,13 +6,14 @@ export class SelectEditor {
   private documentEditor: DocumentEditor;
 
   public constructor(document: Document, selectElementId: string) {
-    this.documentEditor = new DocumentEditor(document);
+    this.documentEditor = DocumentEditor.fromDocument(document);
     this.selectElement = <HTMLSelectElement>this.documentEditor.getElement(selectElementId);
   }
 
   public addOptions(options: string[], optionElementClass: string) {
     options
-      .forEach(option => this.createOptionElementAndAddToSelect(option, optionElementClass));
+      .forEach(option =>
+          this.createOptionElementAndAddToSelect(option, optionElementClass));
   }
 
   private createOptionElementAndAddToSelect(optionElementName: string, optionElementClass: string) {
@@ -24,30 +26,46 @@ export class SelectEditor {
     const document: Document = this.documentEditor.getDocument();
 
     return OptionElementBuilder.Builder(document)
-    .value(optionElementName)
-    .innerHTML(optionElementName)
-    .className(optionElementClass)
-    .build();
+      .value(optionElementName)
+      .innerHTML(optionElementName)
+      .className(optionElementClass)
+      .build();
   }
 
+}
+
+export class ParagraphEditor {
+
+  private paragraphElement: HTMLParagraphElement;
+  private documentEditor: DocumentEditor;
+
+  public constructor(document: Document, paragraphElementId: string) {
+    this.documentEditor = DocumentEditor.fromDocument(document);
+    this.paragraphElement = <HTMLParagraphElement>this.documentEditor.getElement(paragraphElementId);
+  }
+
+  public setParagraphText(paragraphMessage: string) {
+    this.paragraphElement.innerHTML = paragraphMessage;
+  }
 }
 
 export class DocumentEditor {
 
   private readonly document: Document;
 
-  public constructor(document: Document) {
+  private constructor(document: Document) {
     this.document = document;
   }
 
+  public static fromDocument(document: Document): DocumentEditor {
+    return new DocumentEditor(document);
+  }
+
+
   public getElement(elementId: string): HTMLElement {
-    const resultElement = this.document.getElementById(elementId);
+    const nullableResultElement: HTMLElement | null = this.document.getElementById(elementId);
 
-    if (resultElement == null) {
-      throw new Error("invalid element id");
-    }
-
-    return resultElement;
+    return Utils.notNullHTMLElementOrThrowError(nullableResultElement, "invalid element id");
   }
 
   public getDocument(): Document {

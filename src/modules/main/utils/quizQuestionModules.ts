@@ -73,20 +73,3 @@ export class ActualQuizSessionPageUpdater {
   }
 
 }
-
-export class ButtonsVisibilityResolver {
-
-  private quizSession: QuizSession;
-
-  private constructor(quizSession: QuizSession) {
-    this.quizSession = quizSession;
-  }
-
-  public static forQuizSession(quizSession: QuizSession): ButtonsVisibilityResolver {
-    return new ButtonsVisibilityResolver(quizSession);
-  }
-
-  public updateButtonsVisibilityIfNeeded() {
-
-  }
-}

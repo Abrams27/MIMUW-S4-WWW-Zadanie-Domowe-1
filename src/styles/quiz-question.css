@@ -115,3 +115,14 @@ body {
   padding: 16px;
   width: 50%;
 }
+
+.quiz-question-navigation-button:disabled {
+  background-color: darkslategrey;
+  border: 2px solid darkslategrey;
+
+  color: #ffffff;
+  font-size: 100%;
+
+  padding: 16px;
+  width: 50%;
+}

@@ -15,4 +15,5 @@ export class QuizQuestionProperties {
   public static QUIZ_QUESTION_INFO_TABLE_TIME_PENALTY_ID: string = "quiz-question-info-table-time-penalty";
 
   public static QUIZ_QUESTION_ANSWER_INPUT_PLACEHOLDER: string = "podaj odpowiedź";
+
 }

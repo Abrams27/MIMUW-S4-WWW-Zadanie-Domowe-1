@@ -1,4 +1,4 @@
-import {Utils} from "./utils/utils.js";
+import {Utils} from "./utils.js";
 
 export class SelectEditor {
 
@@ -61,7 +61,6 @@ export class DocumentEditor {
   public static fromDocument(document: Document): DocumentEditor {
     return new DocumentEditor(document);
   }
-
 
   public getElement(elementId: string): HTMLElement {
     const nullableResultElement: HTMLElement | null = this.document.getElementById(elementId);

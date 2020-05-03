@@ -1,7 +1,7 @@
-import {Quizzes} from "./quizzes.js";
-import {DocumentEditor, SelectEditor} from "./documentUtils.js";
-import {ProjectProperties} from "./properties/projectProperties.js";
-import {QuizProperties} from "./properties/quizProperties.js";
+import {Quizzes} from "./main/quizzes.js";
+import {DocumentEditor, SelectEditor} from "./main/utils/documentUtils.js";
+import {Properties} from "./main/properties/properties.js";
+import {QuizProperties} from "./main/properties/quizProperties.js";
 
 const quizzes: Quizzes = new Quizzes();
 const quizzesNamesArray: string[] = quizzes.getQuizzesNames();
@@ -12,7 +12,7 @@ selectEditor.addOptions(quizzesNamesArray, QuizProperties.QUIZ_SELECTION_SELECT_
 const documentEditor: DocumentEditor = DocumentEditor.fromDocument(document);
 
 const quizSelectionForm: HTMLFormElement = <HTMLFormElement>documentEditor.getElement(QuizProperties.QUIZ_SELECTION_FORM_ID);
-quizSelectionForm.addEventListener(ProjectProperties.INPUT_TAG, quizSelectionFormInputListener);
+quizSelectionForm.addEventListener(Properties.INPUT_TAG, quizSelectionFormInputListener);
 
 function quizSelectionFormInputListener(event) {
   const chosenQuizName = event.target.value;
@@ -21,11 +21,11 @@ function quizSelectionFormInputListener(event) {
 }
 
 const startQuizButton: HTMLButtonElement = <HTMLButtonElement>documentEditor.getElement(QuizProperties.START_QUIZ_BUTTON_ID);
-startQuizButton.addEventListener(ProjectProperties.CLICK_EVENT_TYPE, startQuizButtonClickListener);
+startQuizButton.addEventListener(Properties.CLICK_EVENT_TYPE, startQuizButtonClickListener);
 
 function startQuizButtonClickListener() {
   const chosenQuiz = quizzes.getChosenQuiz();
 
-  sessionStorage.setItem(ProjectProperties.QUIZ_SESSION_STORAGE_KEY, chosenQuiz.toJson());
-  location.href = ProjectProperties.QUIZ_QUESTION_HTML_FILE;
+  sessionStorage.setItem(Properties.QUIZ_SESSION_STORAGE_KEY, chosenQuiz.toJson());
+  location.href = Properties.QUIZ_QUESTION_HTML_FILE;
 }

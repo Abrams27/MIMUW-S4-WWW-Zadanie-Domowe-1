@@ -1,12 +1,12 @@
-import {ProjectProperties} from "./properties/projectProperties.js";
-import {Quiz} from "./quizzes.js";
-import {Utils} from "./utils/utils.js";
-import {DocumentEditor} from "./documentUtils.js";
-import {QuizSession} from "./quizSession.js";
-import {ActualQuizSessionPageUpdater, ActualQuizSessionPageUpdaterStopwatch} from "./utils/quizQuestionUtils.js";
-import {QuizQuestionProperties} from "./properties/quizQuestionProperties.js";
+import {Properties} from "./main/properties/properties.js";
+import {Quiz} from "./main/quizzes.js";
+import {Utils} from "./main/utils/utils.js";
+import {DocumentEditor} from "./main/utils/documentUtils.js";
+import {QuizSession} from "./main/quizSession.js";
+import {ActualQuizSessionPageUpdater, ActualQuizSessionPageUpdaterStopwatch} from "./main/utils/quizQuestionUtils.js";
+import {QuizQuestionProperties} from "./main/properties/quizQuestionProperties.js";
 
-const nullableQuizJson: string | null = sessionStorage.getItem(ProjectProperties.QUIZ_SESSION_STORAGE_KEY);
+const nullableQuizJson: string | null = sessionStorage.getItem(Properties.QUIZ_SESSION_STORAGE_KEY);
 const quizJson: string = Utils.getStringOrThrowError(nullableQuizJson, "invalid session storage key");
 const quiz: Quiz = Quiz.fromJson(quizJson);
 const quizSession: QuizSession = QuizSession.startWithQuiz(quiz);
@@ -17,20 +17,20 @@ const documentEditor: DocumentEditor = DocumentEditor.fromDocument(document);
 ActualQuizSessionPageUpdaterStopwatch.forUpdaterAndStart(actualQuizSessionPageUpdater);
 
 const answerInput: HTMLInputElement = <HTMLInputElement>documentEditor.getElement(QuizQuestionProperties.QUIZ_QUESTION_ANSWER_INPUT_ID);
-answerInput.addEventListener(ProjectProperties.INPUT_EVENT_TYPE, answerInputListener);
+answerInput.addEventListener(Properties.INPUT_EVENT_TYPE, answerInputListener);
 answerInput.placeholder = QuizQuestionProperties.QUIZ_QUESTION_ANSWER_INPUT_PLACEHOLDER;
 
 const cancelButton: HTMLButtonElement = <HTMLButtonElement>documentEditor.getElement(QuizQuestionProperties.QUIZ_QUESTION_CANCEL_BUTTON_ID);
-cancelButton.addEventListener(ProjectProperties.CLICK_EVENT_TYPE, cancelButtonClickListener);
+cancelButton.addEventListener(Properties.CLICK_EVENT_TYPE, cancelButtonClickListener);
 
 const navigationBackButton: HTMLButtonElement = <HTMLButtonElement>documentEditor.getElement(QuizQuestionProperties.QUIZ_QUESTION_NAVIGATION_BACK_BUTTON_ID);
-navigationBackButton.addEventListener(ProjectProperties.CLICK_EVENT_TYPE, navigationBackButtonClickListener);
+navigationBackButton.addEventListener(Properties.CLICK_EVENT_TYPE, navigationBackButtonClickListener);
 
 const navigationStopButton: HTMLButtonElement = <HTMLButtonElement>documentEditor.getElement(QuizQuestionProperties.QUIZ_QUESTION_NAVIGATION_STOP_BUTTON_ID);
-navigationStopButton.addEventListener(ProjectProperties.CLICK_EVENT_TYPE, navigationStopButtonClickListener);
+navigationStopButton.addEventListener(Properties.CLICK_EVENT_TYPE, navigationStopButtonClickListener);
 
 const navigationNextButton: HTMLButtonElement = <HTMLButtonElement>documentEditor.getElement(QuizQuestionProperties.QUIZ_QUESTION_NAVIGATION_NEXT_BUTTON_ID);
-navigationNextButton.addEventListener(ProjectProperties.CLICK_EVENT_TYPE, navigationNextButtonClickListener);
+navigationNextButton.addEventListener(Properties.CLICK_EVENT_TYPE, navigationNextButtonClickListener);
 
 updateButtonsVisibilityIfNeededAndUpdatePage();
 
@@ -58,7 +58,7 @@ function removeUserAnswer() {
 }
 
 function cancelButtonClickListener() {
-  location.href = ProjectProperties.QUIZ_HTML_FILE;
+  location.href = Properties.QUIZ_HTML_FILE;
 }
 
 function navigationBackButtonClickListener() {
@@ -68,7 +68,7 @@ function navigationBackButtonClickListener() {
 }
 
 function navigationStopButtonClickListener() {
-  location.href = ProjectProperties.QUIZ_ENDING_HTML_FILE;
+  location.href = Properties.QUIZ_ENDING_HTML_FILE;
 }
 
 function navigationNextButtonClickListener() {
@@ -90,25 +90,25 @@ function updateButtonsVisibilityIfNeeded() {
 
 function updateNavigationBackButtonVisibilityIfNeeded() {
   if (quizSession.hasPreviousQuestion()) {
-    navigationBackButton.removeAttribute(ProjectProperties.DISABLED_ATTRIBUTE);
+    navigationBackButton.removeAttribute(Properties.DISABLED_ATTRIBUTE);
   } else {
-    navigationBackButton.setAttribute(ProjectProperties.DISABLED_ATTRIBUTE, ProjectProperties.TRUE);
+    navigationBackButton.setAttribute(Properties.DISABLED_ATTRIBUTE, Properties.TRUE);
   }
 }
 
 function updateNavigationNextButtonVisibilityIfNeeded() {
   if (quizSession.hasNextQuestion()) {
-    navigationNextButton.removeAttribute(ProjectProperties.DISABLED_ATTRIBUTE);
+    navigationNextButton.removeAttribute(Properties.DISABLED_ATTRIBUTE);
   } else {
-    navigationNextButton.setAttribute(ProjectProperties.DISABLED_ATTRIBUTE, ProjectProperties.TRUE);
+    navigationNextButton.setAttribute(Properties.DISABLED_ATTRIBUTE, Properties.TRUE);
   }
 }
 
 function updateNavigationStopButtonVisibilityIfNeeded() {
   if (quizSession.areAllQuestionsAnswered()) {
-    navigationStopButton.removeAttribute(ProjectProperties.DISABLED_ATTRIBUTE);
+    navigationStopButton.removeAttribute(Properties.DISABLED_ATTRIBUTE);
   } else {
-    navigationStopButton.setAttribute(ProjectProperties.DISABLED_ATTRIBUTE, ProjectProperties.TRUE);
+    navigationStopButton.setAttribute(Properties.DISABLED_ATTRIBUTE, Properties.TRUE);
   }
 }
 

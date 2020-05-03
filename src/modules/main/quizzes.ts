@@ -48,6 +48,7 @@ export class Quizzes {
   }
 }
 
+
 export class Quiz {
   private readonly quizJson: QuizJson;
 
@@ -88,6 +89,7 @@ export class Quiz {
   }
 
 }
+
 
 export class QuizQuestionWithAnswersAndTime {
 

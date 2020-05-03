@@ -1,4 +1,4 @@
-import {HTMLElementEditor} from "../documentUtils.js";
+import {HTMLElementEditor} from "./documentUtils.js";
 import {QuizSession} from "../quizSession.js";
 import {QuizQuestionProperties} from "../properties/quizQuestionProperties.js";
 import {Utils} from "./utils.js";
@@ -44,11 +44,6 @@ export class ActualQuizSessionPageUpdater {
     this.loadActualQuizSessionPageWrongAnswerPenalty();
   }
 
-  private updateCurrentPageTimesOnLoad() {
-    this.currentPageLoadTime = this.quizSession.getSessionAnswersTime();
-    this.currentQuestionAnswerTimeOnLoad = this.quizSession.getUserAnswerTimeForCurrentQuestion();
-  }
-
   public updateQuizSessionTime(newStopwatchValue: number) {
     const formattedNewStopwatchValue = Utils.getStringDescriptingTimeInSeconds(newStopwatchValue);
 
@@ -58,12 +53,17 @@ export class ActualQuizSessionPageUpdater {
   }
 
   public updateCurrentQuestionStopwatch(newStopwatchValue: number) {
-    const realQuestionAnswerTime: number = this.currentQuestionAnswerTimeOnLoad + newStopwatchValue - this.currentPageLoadTime;
+    const realQuestionAnswerTime: number = this.currentQuestionAnswerTimeOnLoad - this.currentPageLoadTime + newStopwatchValue;
     const formattedNewStopwatchValue: string = Utils.getStringDescriptingTimeInSeconds(realQuestionAnswerTime);
 
     this.quizSession.updateUserAnswerTimeForCurrentQuestion(realQuestionAnswerTime);
 
     this.questionInfoTableQuizPageTimeEditor.setInnerHTML(formattedNewStopwatchValue);
+  }
+
+  private updateCurrentPageTimesOnLoad() {
+    this.currentPageLoadTime = this.quizSession.getSessionAnswersTime();
+    this.currentQuestionAnswerTimeOnLoad = this.quizSession.getUserAnswerTimeForCurrentQuestion();
   }
 
   private loadActualQuizSessionPageQuizIntroduction() {
@@ -104,6 +104,8 @@ export class ActualQuizSessionPageUpdater {
 
 export class ActualQuizSessionPageUpdaterStopwatch {
 
+  private static STOPWATCH_TIMEOUT_IM_MS: number = 1000;
+
   private actualQuizSessionPageUpdater: ActualQuizSessionPageUpdater;
   private counter: number;
 
@@ -133,7 +135,7 @@ export class ActualQuizSessionPageUpdaterStopwatch {
   }
 
   private timer() {
-    setTimeout(() => this.count(), 1000);
+    setTimeout(() => this.count(), ActualQuizSessionPageUpdaterStopwatch.STOPWATCH_TIMEOUT_IM_MS);
   }
 
 }

@@ -1,4 +1,4 @@
-export class ProjectProperties {
+export class Properties {
 
   public static QUIZ_HTML_FILE: string = "quiz.html";
   public static QUIZ_QUESTION_HTML_FILE: string = "quizQuestion.html";

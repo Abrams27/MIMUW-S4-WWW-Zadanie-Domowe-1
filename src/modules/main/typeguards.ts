@@ -25,6 +25,7 @@ export class TypeGuardsUtils {
 
 }
 
+
 export class QuizQuestionWithAnswerGuard {
 
   private static OBJECT_FIELDS: string[] = ["question", "answer", "wrongAnswerPenalty"];
@@ -37,6 +38,7 @@ export class QuizQuestionWithAnswerGuard {
   }
 
 }
+
 
 export class QuizGuard {
 

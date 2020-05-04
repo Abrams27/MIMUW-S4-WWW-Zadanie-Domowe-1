@@ -70,7 +70,7 @@ export class QuizDetailedScoreboard {
 
 export class QuizScore {
 
-  private score: number;
+  private readonly score: number;
 
   public constructor(score: number) {
     this.score = score;
@@ -78,6 +78,16 @@ export class QuizScore {
 
   public getScore(): number {
     return this.score;
+  }
+
+  public compare(quizScore: QuizScore): number {
+    if (this.score < quizScore.score) {
+      return -1;
+    } else if (this.score > quizScore.score) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 
 }

@@ -37,7 +37,7 @@ navigationNextButton.addEventListener(Properties.CLICK_EVENT_TYPE, navigationNex
 updateButtonsVisibilityIfNeededAndUpdatePage();
 
 
-function answerInputListener(event) {
+function answerInputListener(event: any) {
   const insertedValue = event.target.value;
 
   if (insertedValue.length > 0) {

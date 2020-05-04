@@ -15,4 +15,8 @@ export class Properties {
   public static TRUE: string = "true";
 
   public static DISABLED_ATTRIBUTE: string = "disabled";
+
+  public static INDEXED_DB_TABLE_NAME: string = "quizquizquiz";
+  public static INDEXED_DB_VERSION: number = 1;
+  public static INDEXED_BD_OBJECT_STORE_BEST_SCOREBOARD: string = "quizquizquiz-object-store-best-scoreboard";
 }

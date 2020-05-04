@@ -37,7 +37,7 @@ export class SelectEditor {
 }
 
 
-export class TableEditor {
+export class QuizScoreboardTableEditor {
 
   private tableElement: HTMLTableElement;
   private documentEditor: DocumentEditor;

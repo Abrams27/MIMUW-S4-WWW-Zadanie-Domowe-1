@@ -1,5 +1,5 @@
 export const exampleQuiz: string = `{
-  "name": "alkoholowo matematyczy quiz",
+  "name": "alkoholowo matematyczny quiz",
   "introduction": "Liczyć i pić każdy może!",
   "questionsWithAnswers": [
     {

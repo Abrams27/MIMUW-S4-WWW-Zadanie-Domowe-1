@@ -66,7 +66,7 @@ body {
   grid-area: quiz-ending-stats-details-section;
 }
 
-.quiz-ending-stats-details-table {
+#quiz-ending-stats-details-table {
   width: 100%;
 }
 

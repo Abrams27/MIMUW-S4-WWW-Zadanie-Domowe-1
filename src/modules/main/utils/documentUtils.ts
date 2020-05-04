@@ -1,4 +1,6 @@
 import {Utils} from "./utils.js";
+import {QuizEndingProperties} from "../properties/quizEndingProperties.js";
+
 
 export class SelectEditor {
 
@@ -33,6 +35,82 @@ export class SelectEditor {
   }
 
 }
+
+
+export class TableEditor {
+
+  private tableElement: HTMLTableElement;
+  private documentEditor: DocumentEditor;
+  private numberOfRows: number;
+
+  public constructor(document: Document, tableElementId: string) {
+    this.documentEditor = DocumentEditor.fromDocument(document);
+    this.tableElement = <HTMLTableElement>this.documentEditor.getElement(tableElementId);
+    this.numberOfRows = 0;
+  }
+
+  public addRowWithAnswerTimeAndPenaltyForQuestion(isAnswerCorrect: boolean, answerTime: number, wrongAnswerPenalty: number) {
+    const newRow: HTMLTableRowElement = this.tableElement.insertRow();
+
+    this.addQuestionNumberCellToTableRow(newRow);
+    this.addAnswerCorrectnessCellToTableRow(newRow, isAnswerCorrect);
+    this.addTimeWithPenaltyIfWrongCellToTAbleRow(newRow, isAnswerCorrect, answerTime, wrongAnswerPenalty);
+  }
+
+  private addQuestionNumberCellToTableRow(tableRow: HTMLTableRowElement) {
+    this.numberOfRows++;
+    const formattedQuestionNumberCell: string = `Pytanie ${this.numberOfRows}:`;
+
+    this.addCellToTableRow(tableRow, formattedQuestionNumberCell, QuizEndingProperties.QUIZ_ENDING_STATS_DETAILS_TABLE_LEFT_ELEMENT_CLASS);
+  }
+
+  private addAnswerCorrectnessCellToTableRow(tableRow: HTMLTableRowElement, isAnswerCorrect: boolean) {
+    if (isAnswerCorrect) {
+      this.addCorrectAnswerCellToTableRow(tableRow);
+    } else {
+      this.addIncorrectAnswerCellToTableRow(tableRow);
+    }
+  }
+
+  private addCorrectAnswerCellToTableRow(tableRow: HTMLTableRowElement) {
+    this.addCellToTableRow(tableRow, QuizEndingProperties.QUIZ_ENDING_STATS_DETAILS_TABLE_OK_ANSWER,
+        QuizEndingProperties.QUIZ_ENDING_STATS_DETAILS_TABLE_MIDDLE_ELEMENT_OK_CLASS);
+  }
+
+  private addIncorrectAnswerCellToTableRow(tableRow: HTMLTableRowElement) {
+    this.addCellToTableRow(tableRow, QuizEndingProperties.QUIZ_ENDING_STATS_DETAILS_TABLE_WA_ANSWER,
+        QuizEndingProperties.QUIZ_ENDING_STATS_DETAILS_TABLE_MIDDLE_ELEMENT_WA_CLASS);
+  }
+
+  private addTimeWithPenaltyIfWrongCellToTAbleRow(tableRow: HTMLTableRowElement, isAnswerCorrect: boolean, answerTime: number, wrongAnswerPenalty: number) {
+    if (isAnswerCorrect) {
+      this.addTimeToTAbleRow(tableRow, answerTime);
+    } else {
+      this.addTimeWithPenaltyCellToTAbleRow(tableRow, answerTime, wrongAnswerPenalty);
+    }
+  }
+
+  private addTimeToTAbleRow(tableRow: HTMLTableRowElement, answerTime: number) {
+    const formattedTime: string = Utils.getStringDescriptingTimeInSeconds(answerTime);
+
+    this.addCellToTableRow(tableRow, formattedTime, QuizEndingProperties.QUIZ_ENDING_STATS_DETAILS_TABLE_RIGHT_ELEMENT_CLASS);
+  }
+
+  private addTimeWithPenaltyCellToTAbleRow(tableRow: HTMLTableRowElement, answerTime: number, wrongAnswerPenalty: number) {
+    const formattedTime: string = Utils.getStringDescriptingTimeInSeconds(answerTime);
+    const formattedPenaltyTime: string = Utils.getStringDescriptingTimeInSeconds(wrongAnswerPenalty);
+    const formattedTimeWithPenalty: string = `${formattedTime} (+ ${formattedPenaltyTime})`;
+
+    this.addCellToTableRow(tableRow, formattedTimeWithPenalty, QuizEndingProperties.QUIZ_ENDING_STATS_DETAILS_TABLE_RIGHT_ELEMENT_CLASS);
+  }
+
+  private addCellToTableRow(tableRow: HTMLTableRowElement, innerHTML: string, cellClass: string) {
+    const newCell = tableRow.insertCell();
+    newCell.innerHTML = innerHTML;
+    newCell.className = cellClass;
+  }
+}
+
 
 export class HTMLElementEditor {
 

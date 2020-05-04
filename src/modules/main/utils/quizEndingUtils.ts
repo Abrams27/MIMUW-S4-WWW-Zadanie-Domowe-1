@@ -1,6 +1,8 @@
-import {QuizDetailedScoreboard} from "../scoreboard.js";
-import {HTMLElementEditor} from "./documentUtils.js";
+import {QuestionStatistics, QuizDetailedScoreboard} from "../scoreboard.js";
+import {HTMLElementEditor, TableEditor} from "./documentUtils.js";
 import {QuizEndingProperties} from "../properties/quizEndingProperties.js";
+import {Utils} from "./utils.js";
+import doc = Mocha.reporters.doc;
 
 export class QuizEndingPageUpdater {
 
@@ -8,17 +10,20 @@ export class QuizEndingPageUpdater {
 
   private quizStatsAnswerEditor: HTMLElementEditor;
   private quizStatsResultEditor: HTMLElementEditor;
+  private quizDetailsStatsTableEditor: TableEditor;
 
   public constructor(document: Document, detailedScoreboard: QuizDetailedScoreboard) {
     this.detailedScoreboard = detailedScoreboard;
 
     this.quizStatsAnswerEditor = new HTMLElementEditor(document, QuizEndingProperties.QUIZ_ENDING_STATS_TABLE_ANSWERS_ID);
     this.quizStatsResultEditor = new HTMLElementEditor(document, QuizEndingProperties.QUIZ_ENDING_STATS_TABLE_RESULT_ID);
-
+    this.quizDetailsStatsTableEditor = new TableEditor(document, QuizEndingProperties.QUIZ_ENDING_STATS_DETAILS_TABLE_ID);
   }
 
   public loadPage() {
     this.loadPageQuizStatsAnswer();
+    this.loadPageQuizStatsResult();
+    this.loadPageDetailsStatsTable();
   }
 
   private loadPageQuizStatsAnswer() {
@@ -27,6 +32,28 @@ export class QuizEndingPageUpdater {
     const formattedQuizStatsAnswer: string = `${quizStatsNumberOfCorrectAnswers} / ${quizStatsNumberOfAnswers}`;
 
     this.quizStatsAnswerEditor.setInnerHTML(formattedQuizStatsAnswer);
+  }
+
+  private loadPageQuizStatsResult() {
+    const quizStatsResult: number = this.detailedScoreboard.getQuizScore();
+    const formattedQuizStatsResult: string = Utils.getStringDescriptingTimeInSeconds(quizStatsResult);
+
+    this.quizStatsResultEditor.setInnerHTML(formattedQuizStatsResult);
+  }
+
+  private loadPageDetailsStatsTable() {
+    this.detailedScoreboard
+        .getQuestionsStatistics()
+        .forEach(questionStatistics => this.loadPageDetailsStatsTableRow(questionStatistics));
+  }
+
+  private loadPageDetailsStatsTableRow(questionStatistics: QuestionStatistics) {
+    const isAnswerCorrect: boolean = questionStatistics.isAnswerCorrect();
+    const answerTime: number = questionStatistics.getAnswerTime();
+    const timePenalty: number = questionStatistics.getTimePenalty();
+
+    this.quizDetailsStatsTableEditor
+      .addRowWithAnswerTimeAndPenaltyForQuestion(isAnswerCorrect, answerTime, timePenalty);
   }
 
 }

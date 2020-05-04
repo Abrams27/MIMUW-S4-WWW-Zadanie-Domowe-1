@@ -1,5 +1,5 @@
 import {QuizQuestionWithAnswersAndTime} from "./quizzes.js";
-import {QuestionStatisticsGuard, QuizDetailedScoreboardGuard} from "./typeguards.js";
+import {QuizDetailedScoreboardGuard} from "./typeguards.js";
 
 export class QuizDetailedScoreboard {
 
@@ -35,6 +35,14 @@ export class QuizDetailedScoreboard {
     return JSON.stringify(this);
   }
 
+  public getQuizScore(): number {
+    return this.quizScore.getScore();
+  }
+
+  public getQuestionsStatistics(): QuestionStatistics[] {
+    return this.questionsStatistics;
+  }
+
   public getNumberOfCorrectsAnswers(): number {
     return this.questionsStatistics
         .map(questionStatistics => questionStatistics.isAnswerCorrect())
@@ -68,6 +76,10 @@ export class QuizScore {
     this.score = score;
   }
 
+  public getScore(): number {
+    return this.score;
+  }
+
 }
 
 
@@ -88,7 +100,19 @@ export class QuestionStatistics {
         questionStatistics.isAnswerCorrectFlag,
         questionStatistics.timePenalty,
         questionStatistics.timeSpendInSeconds);
-}
+  }
+
+  public isAnswerCorrect(): boolean {
+    return this.isAnswerCorrectFlag;
+  }
+
+  public getAnswerTime(): number {
+    return this.timeSpendInSeconds;
+  }
+
+  public getTimePenalty(): number {
+    return this.timePenalty;
+  }
 
   public getTimeWithPenalty(): number {
     if (this.isAnswerCorrectFlag) {
@@ -96,11 +120,6 @@ export class QuestionStatistics {
     } else {
       return this.timeSpendInSeconds + this.timePenalty;
     }
-  }
-
-  public isAnswerCorrect(): boolean {
-
-    return this.isAnswerCorrectFlag;
   }
 
 }

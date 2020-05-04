@@ -4,28 +4,28 @@ import "mocha";
 import {QuestionStatisticsGuard} from "../../main/typeguards";
 
 const testValidJson: string = `{
-  "isAnswerCorrect": true,
+  "isAnswerCorrectFlag": true,
   "timePenalty": 1,
   "timeSpendInSeconds": 1
 }`;
 runTestForQuestionStatisticsGuard(testValidJson, true, "valid json");
 
 const testInvalidIsAnswerCorrectFieldTypeJson: string = `{
-  "isAnswerCorrect": "test",
+  "isAnswerCorrectFlag": "test",
   "timePenalty": 1,
   "timeSpendInSeconds": 1
 }`;
 runTestForQuestionStatisticsGuard(testInvalidIsAnswerCorrectFieldTypeJson, false, "invalid isAnswerCorrect field type json");
 
 const testInvalidTimePenaltyFieldTypeJson: string = `{
-  "isAnswerCorrect": true,
+  "isAnswerCorrectFlag": true,
   "timePenalty": [1],
   "timeSpendInSeconds": 1
 }`;
 runTestForQuestionStatisticsGuard(testInvalidTimePenaltyFieldTypeJson, false, "invalid timePenalty field type json");
 
 const testInvalidTimeSpendInSecondsFieldTypeJson: string = `{
-  "isAnswerCorrect": true,
+  "isAnswerCorrectFlag": true,
   "timePenalty": 1,
   "timeSpendInSeconds": "test"
 }`;
@@ -39,14 +39,14 @@ const testInvalidIsAnswerCorrectFieldNameJson: string = `{
 runTestForQuestionStatisticsGuard(testInvalidIsAnswerCorrectFieldNameJson, false, "invalid isAnswerCorrect field name json");
 
 const testInvalidTimePenaltyFieldNameJson: string = `{
-  "isAnswerCorrect": true,
+  "isAnswerCorrectFlag": true,
   "timePenaltydsdsa": 1,
   "timeSpendInSeconds": 1
 }`;
 runTestForQuestionStatisticsGuard(testInvalidTimePenaltyFieldNameJson, false, "invalid timePenalty field name json");
 
 const testInvalidTimeSpendInSecondsFieldNameJson: string = `{
-  "isAnswerCorrect": true,
+  "isAnswerCorrectFlag": true,
   "timePenalty": 1,
   "timeSpendInSecondrewrews": 1
 }`;
@@ -55,7 +55,7 @@ runTestForQuestionStatisticsGuard(testInvalidTimeSpendInSecondsFieldNameJson, fa
 function runTestForQuestionStatisticsGuard(inputJson: string, expectedValue: boolean, description: string) {
   const parsedTestJson = JSON.parse(inputJson);
 
-  describe("QuizGuard test", () => {
+  describe("QuestionStatisticsGuard test", () => {
     it(`should return '${expectedValue}' for ${description}`, () => {
       expect(QuestionStatisticsGuard.check(parsedTestJson)).to.equal(expectedValue);
     });

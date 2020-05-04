@@ -6,12 +6,12 @@ import {QuizDetailedScoreboardGuard} from "../../main/typeguards";
 const testValidJson: string = `{
   "questionsStatistics": [
     {
-      "isAnswerCorrect": true,
+      "isAnswerCorrectFlag": true,
       "timePenalty": 1,
       "timeSpendInSeconds": 1
     },
     {
-      "isAnswerCorrect": true,
+      "isAnswerCorrectFlag": true,
       "timePenalty": 1,
       "timeSpendInSeconds": 1
     }
@@ -25,12 +25,12 @@ runTestForQuizDetailedScoreboardGuard(testValidJson, true, "valid json");
 const testInvalidQuestionsStatisticsFieldTypeJson: string = `{
   "questionsStatistics": [
     {
-      "isAnswerCorrect": true,
+      "isAnswerCorrectFlag": true,
       "timePenalty": "test",
       "timeSpendInSeconds": 1
     },
     {
-      "isAnswerCorrect": true,
+      "isAnswerCorrectFlag": true,
       "timePenalty": 1,
       "timeSpendInSeconds": 1
     }
@@ -44,12 +44,12 @@ runTestForQuizDetailedScoreboardGuard(testInvalidQuestionsStatisticsFieldTypeJso
 const testInvalidQuizScoreFieldTypeJson: string = `{
   "questionsStatistics": [
     {
-      "isAnswerCorrect": true,
+      "isAnswerCorrectFlag": true,
       "timePenalty": 1,
       "timeSpendInSeconds": 1
     },
     {
-      "isAnswerCorrect": true,
+      "isAnswerCorrectFlag": true,
       "timePenalty": 1,
       "timeSpendInSeconds": 1
     }
@@ -63,12 +63,12 @@ runTestForQuizDetailedScoreboardGuard(testInvalidQuizScoreFieldTypeJson, false, 
 const testInvalidQuestionsStatisticsFieldNameJson: string = `{
   "questionsStatisdss": [
     {
-      "isAnswerCorrect": true,
+      "isAnswerCorrectFlag": true,
       "timePenalty": 1,
       "timeSpendInSeconds": 1
     },
     {
-      "isAnswerCorrect": true,
+      "isAnswerCorrectFlag": true,
       "timePenalty": 1,
       "timeSpendInSeconds": 1
     }
@@ -82,12 +82,12 @@ runTestForQuizDetailedScoreboardGuard(testInvalidQuestionsStatisticsFieldNameJso
 const testInvalidQuizScoreFieldNameJson: string = `{
   "questionsStatistics": [
     {
-      "isAnswerCorrect": true,
+      "isAnswerCorrectFlag": true,
       "timePenalty": 1,
       "timeSpendInSeconds": 1
     },
     {
-      "isAnswerCorrect": true,
+      "isAnswerCorrectFlag": true,
       "timePenalty": 1,
       "timeSpendInSeconds": 1
     }
@@ -101,7 +101,7 @@ runTestForQuizDetailedScoreboardGuard(testInvalidQuizScoreFieldNameJson, false, 
 function runTestForQuizDetailedScoreboardGuard(inputJson: string, expectedValue: boolean, description: string) {
   const parsedTestJson = JSON.parse(inputJson);
 
-  describe("QuizGuard test", () => {
+  describe("QuizDetailedScoreboardGuard test", () => {
     it(`should return '${expectedValue}' for ${description}`, () => {
       expect(QuizDetailedScoreboardGuard.check(parsedTestJson)).to.equal(expectedValue);
     });

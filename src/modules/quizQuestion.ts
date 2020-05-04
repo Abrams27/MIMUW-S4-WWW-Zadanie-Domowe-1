@@ -60,6 +60,8 @@ function removeUserAnswer() {
 }
 
 function cancelButtonClickListener() {
+  sessionStorage.removeItem(Properties.QUIZ_SESSION_STORAGE_KEY);
+
   location.href = Properties.QUIZ_HTML_FILE;
 }
 

@@ -1,4 +1,5 @@
 import {QuizJson, QuizQuestionWithAnswerJson} from '../resources/quizzesConfig.js';
+import {QuestionStatistics, QuizDetailedScoreboard, QuizScore} from "./scoreboard";
 
 export class TypeGuardsUtils {
 
@@ -73,7 +74,7 @@ export class QuizDetailedScoreboardGuard {
 
   private static OBJECT_FIELDS: string[] = ["questionsStatistics", "quizScore"];
 
-  public static check(object: any): object is QuizQuestionWithAnswerJson {
+  public static check(object: any): object is QuizDetailedScoreboard {
     return TypeGuardsUtils.doesObjectContainsFields(object, this.OBJECT_FIELDS)
         && this.isFieldAnArrayOfQuestionStatistics(object.questionsStatistics)
         && this.isFieldInstanceOfQuizScore(object.quizScore);
@@ -104,7 +105,7 @@ export class QuizScoreGuard {
 
   private static OBJECT_FIELDS: string[] = ["score"];
 
-  public static check(object: any): object is QuizQuestionWithAnswerJson {
+  public static check(object: any): object is QuizScore {
     return TypeGuardsUtils.doesObjectContainsFields(object, this.OBJECT_FIELDS)
         && TypeGuardsUtils.isFieldOfType(object.score, TypeGuardsUtils.NUMBER_TYPE)
   }
@@ -114,11 +115,11 @@ export class QuizScoreGuard {
 
 export class QuestionStatisticsGuard {
 
-  private static OBJECT_FIELDS: string[] = ["isAnswerCorrect", "timePenalty", "timeSpendInSeconds"];
+  private static OBJECT_FIELDS: string[] = ["isAnswerCorrectFlag", "timePenalty", "timeSpendInSeconds"];
 
-  public static check(object: any): object is QuizQuestionWithAnswerJson {
+  public static check(object: any): object is QuestionStatistics {
     return TypeGuardsUtils.doesObjectContainsFields(object, this.OBJECT_FIELDS)
-        && TypeGuardsUtils.isFieldOfType(object.isAnswerCorrect, TypeGuardsUtils.BOOLEAN_TYPE)
+        && TypeGuardsUtils.isFieldOfType(object.isAnswerCorrectFlag, TypeGuardsUtils.BOOLEAN_TYPE)
         && TypeGuardsUtils.isFieldOfType(object.timePenalty, TypeGuardsUtils.NUMBER_TYPE)
         && TypeGuardsUtils.isFieldOfType(object.timeSpendInSeconds, TypeGuardsUtils.NUMBER_TYPE);
   }

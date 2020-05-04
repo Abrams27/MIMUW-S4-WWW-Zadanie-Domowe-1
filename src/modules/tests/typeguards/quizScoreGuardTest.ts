@@ -21,7 +21,7 @@ runTestForQuizScoreGuard(testInvalidScoreFieldNameJson, false, "invalid score fi
 function runTestForQuizScoreGuard(inputJson: string, expectedValue: boolean, description: string) {
   const parsedTestJson = JSON.parse(inputJson);
 
-  describe("QuizGuard test", () => {
+  describe("QuizScoreGuard test", () => {
     it(`should return '${expectedValue}' for ${description}`, () => {
       expect(QuizScoreGuard.check(parsedTestJson)).to.equal(expectedValue);
     });

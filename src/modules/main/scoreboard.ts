@@ -1,4 +1,5 @@
 import {QuizQuestionWithAnswersAndTime} from "./quizzes.js";
+import {QuestionStatisticsGuard, QuizDetailedScoreboardGuard} from "./typeguards.js";
 
 export class QuizDetailedScoreboard {
 
@@ -14,8 +15,35 @@ export class QuizDetailedScoreboard {
     return new QuizDetailedScoreboard(this.mapQuizQuestionWithAnswersAndTime(questionsListWithUserAnswers));
   }
 
+  public static fromJson(quizDetailedScoreboardJson: string): QuizDetailedScoreboard {
+    const parsedQuizDetailedScoreboardJson = JSON.parse(quizDetailedScoreboardJson);
+
+    if (QuizDetailedScoreboardGuard.check(parsedQuizDetailedScoreboardJson)) {
+      const questionsStatistics: QuestionStatistics[] = this.copyOfQuestionStatisticsArray(parsedQuizDetailedScoreboardJson.questionsStatistics);
+      return new QuizDetailedScoreboard(questionsStatistics);
+    } else {
+      throw new Error("invalid scoreboard json format");
+    }
+  }
+
+  private static copyOfQuestionStatisticsArray(questionsStatistics: QuestionStatistics[]): QuestionStatistics[] {
+    return questionsStatistics
+      .map(questionStatistics => QuestionStatistics.copyOf(questionStatistics));
+  }
+
   public toJson(): string {
     return JSON.stringify(this);
+  }
+
+  public getNumberOfCorrectsAnswers(): number {
+    return this.questionsStatistics
+        .map(questionStatistics => questionStatistics.isAnswerCorrect())
+        .map(isAnswerCorrect => Number(isAnswerCorrect))
+        .reduce((sum, isCorrect) => sum + isCorrect);
+  }
+
+  public getNumberOfAnswers(): number {
+    return this.questionsStatistics.length;
   }
 
   private static mapQuizQuestionWithAnswersAndTime(questionsListWithUserAnswers: QuizQuestionWithAnswersAndTime[]): QuestionStatistics[] {
@@ -45,22 +73,34 @@ export class QuizScore {
 
 export class QuestionStatistics {
 
-  private readonly isAnswerCorrect: boolean;
+  private readonly isAnswerCorrectFlag: boolean;
   private readonly timePenalty: number;
   private readonly timeSpendInSeconds: number;
 
   public constructor(isAnswerCorrect: boolean, timePenalty: number, timeSpendInSeconds: number) {
-    this.isAnswerCorrect = isAnswerCorrect;
+    this.isAnswerCorrectFlag = isAnswerCorrect;
     this.timePenalty = timePenalty;
     this.timeSpendInSeconds = timeSpendInSeconds;
   }
 
+  public static copyOf(questionStatistics: QuestionStatistics): QuestionStatistics {
+    return new QuestionStatistics(
+        questionStatistics.isAnswerCorrectFlag,
+        questionStatistics.timePenalty,
+        questionStatistics.timeSpendInSeconds);
+}
+
   public getTimeWithPenalty(): number {
-    if (this.isAnswerCorrect) {
+    if (this.isAnswerCorrectFlag) {
       return this.timeSpendInSeconds;
     } else {
       return this.timeSpendInSeconds + this.timePenalty;
     }
+  }
+
+  public isAnswerCorrect(): boolean {
+
+    return this.isAnswerCorrectFlag;
   }
 
 }
@@ -80,6 +120,5 @@ class QuizQuestionWithAnswersAndTimeMapper {
 
     return new QuestionStatistics(isAnswerCorrect, wrongAnswerPenalty, answerTimeInSeconds);
   }
-
 
 }

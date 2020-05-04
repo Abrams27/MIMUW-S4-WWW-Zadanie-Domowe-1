@@ -50,7 +50,7 @@ export class IndexedDBClient {
       var request = objectStore.getAll();
       request.onerror = IndexedDBClient.defaultErrorHandler;
 
-      request.onsuccess = function(event: any) {
+      request.onsuccess = function() {
         let quizScoresArray: QuizScore[] = request.result
           .map(quizScore => QuizScore.copyOf(quizScore));
 

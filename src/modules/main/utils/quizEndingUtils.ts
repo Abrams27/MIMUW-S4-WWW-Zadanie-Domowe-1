@@ -35,7 +35,7 @@ export class QuizEndingPageUpdater {
   }
 
   private loadPageQuizStatsResult() {
-    const quizStatsResult: number = this.detailedScoreboard.getQuizScore();
+    const quizStatsResult: number = this.detailedScoreboard.getNumericQuizScore();
     const formattedQuizStatsResult: string = Utils.getStringDescriptingTimeInSeconds(quizStatsResult);
 
     this.quizStatsResultEditor.setInnerHTML(formattedQuizStatsResult);

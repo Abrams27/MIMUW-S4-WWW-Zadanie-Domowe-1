@@ -13,4 +13,7 @@ export class QuizEndingProperties {
   public static QUIZ_ENDING_STATS_DETAILS_TABLE_MIDDLE_ELEMENT_WA_CLASS: string = "quiz-ending-stats-details-table-middle-element-wa";
   public static QUIZ_ENDING_STATS_DETAILS_TABLE_RIGHT_ELEMENT_CLASS: string = "quiz-ending-stats-details-table-right-element";
 
+  public static QUIZ_ENDING_SAVING_BUTTON_SIMPLE_SCORE: string = "quiz-ending-saving-button-simple-score";
+  public static QUIZ_ENDING_SAVING_BUTTON_DETAILED_SCORE: string = "quiz-ending-saving-button-detailed-score";
+
 }

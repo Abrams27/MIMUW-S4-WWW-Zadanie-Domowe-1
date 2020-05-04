@@ -35,8 +35,12 @@ export class QuizDetailedScoreboard {
     return JSON.stringify(this);
   }
 
-  public getQuizScore(): number {
+  public getNumericQuizScore(): number {
     return this.quizScore.getScore();
+  }
+
+  public getQuizScore(): QuizScore {
+    return this.quizScore;
   }
 
   public getQuestionsStatistics(): QuestionStatistics[] {

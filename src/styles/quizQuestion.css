@@ -21,6 +21,33 @@ body {
       "quiz-question-navigation-section-back  quiz-question-navigation-section-stop quiz-question-navigation-section-next"
 }
 
+@media screen and (max-width: 1100px) {
+
+  .quiz-question-container {
+    display: inline-grid;
+    grid-row-gap: 10%;
+    width: 100%;
+
+    grid-template-rows: auto;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "quiz-question-header-section"
+        "quiz-question-introduction-section"
+        "quiz-question-and-answer-section"
+        "quiz-question-navigation-section-back"
+        "quiz-question-navigation-section-stop"
+        "quiz-question-navigation-section-next"
+  }
+
+  .quiz-question-info-section {
+    display: none;
+  }
+
+  .quiz-question-cancel-button-section {
+    display: none;
+  }
+}
+
 .quiz-question-header-section {
   grid-area: quiz-question-header-section;
 
@@ -128,3 +155,4 @@ body {
   padding: 16px;
   width: 50%;
 }
+

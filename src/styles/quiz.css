@@ -12,12 +12,33 @@ body {
   width: 100%;
 
   grid-template-rows: auto;
+  grid-template-columns: auto auto;
   grid-template-areas:
       "quiz-header-section        quiz-header-section"
       "quiz-selection-section     quizzes-scoreboard-section"
       "start-quiz-button-section  start-quiz-button-section"
 }
 
+@media screen and (max-width: 1100px) {
+
+  .quiz-body-container {
+    display: inline-grid;
+    grid-row-gap: 10%;
+    width: 100%;
+
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "quiz-header-section"
+        "quiz-selection-section"
+        "start-quiz-button-section"
+  }
+
+  .quizzes-scoreboard-section {
+    display: none;
+  }
+
+}
 
 .quiz-header-section {
   grid-area: quiz-header-section;

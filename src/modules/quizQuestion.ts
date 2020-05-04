@@ -19,8 +19,6 @@ const currentQuizSessionPageUpdater: CurrentQuizSessionPageEditor = new CurrentQ
 
 CurrentQuizSessionPageEditorStopwatch.forUpdaterAndStart(currentQuizSessionPageUpdater);
 
-updateButtonsVisibilityIfNeededAndUpdatePage();
-
 
 const answerInput: HTMLInputElement = <HTMLInputElement>documentEditor.getElement(QuizQuestionProperties.QUIZ_QUESTION_ANSWER_INPUT_ID);
 answerInput.addEventListener(Properties.INPUT_EVENT_TYPE, answerInputListener);
@@ -38,6 +36,7 @@ navigationStopButton.addEventListener(Properties.CLICK_EVENT_TYPE, navigationSto
 const navigationNextButton: HTMLButtonElement = <HTMLButtonElement>documentEditor.getElement(QuizQuestionProperties.QUIZ_QUESTION_NAVIGATION_NEXT_BUTTON_ID);
 navigationNextButton.addEventListener(Properties.CLICK_EVENT_TYPE, navigationNextButtonClickListener);
 
+updateButtonsVisibilityIfNeededAndUpdatePage();
 
 function answerInputListener(event: any) {
   const insertedValue = event.target.value;

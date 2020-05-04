@@ -1,9 +1,9 @@
-import {HTMLElementEditor} from "./documentUtils.js";
-import {QuizSession} from "../quizSession.js";
+import {HTMLElementEditor} from "./documentEditors.js";
+import {QuizSession} from "../quizzes/quizSession.js";
 import {QuizQuestionProperties} from "../properties/quizQuestionProperties.js";
-import {Utils} from "./utils.js";
+import {Utils} from "../utils/utils.js";
 
-export class CurrentQuizSessionPageUpdater {
+export class CurrentQuizSessionPageEditor {
 
   private quizSession: QuizSession;
   private currentPageLoadTime: number;
@@ -102,20 +102,20 @@ export class CurrentQuizSessionPageUpdater {
 
 }
 
-export class CurrentQuizSessionPageUpdaterStopwatch {
+export class CurrentQuizSessionPageEditorStopwatch {
 
   private static STOPWATCH_TIMEOUT_IM_MS: number = 1000;
 
-  private currentQuizSessionPageUpdater: CurrentQuizSessionPageUpdater;
+  private currentQuizSessionPageUpdater: CurrentQuizSessionPageEditor;
   private counter: number;
 
-  private constructor(currentQuizSessionPageUpdater: CurrentQuizSessionPageUpdater) {
+  private constructor(currentQuizSessionPageUpdater: CurrentQuizSessionPageEditor) {
     this.currentQuizSessionPageUpdater = currentQuizSessionPageUpdater;
     this.counter = 0;
   }
 
-  public static forUpdaterAndStart(currentQuizSessionPageUpdater: CurrentQuizSessionPageUpdater): CurrentQuizSessionPageUpdaterStopwatch {
-    const stopwatch: CurrentQuizSessionPageUpdaterStopwatch = new CurrentQuizSessionPageUpdaterStopwatch(currentQuizSessionPageUpdater);
+  public static forUpdaterAndStart(currentQuizSessionPageUpdater: CurrentQuizSessionPageEditor): CurrentQuizSessionPageEditorStopwatch {
+    const stopwatch: CurrentQuizSessionPageEditorStopwatch = new CurrentQuizSessionPageEditorStopwatch(currentQuizSessionPageUpdater);
     stopwatch.start();
 
     return stopwatch;
@@ -135,7 +135,7 @@ export class CurrentQuizSessionPageUpdaterStopwatch {
   }
 
   private timer() {
-    setTimeout(() => this.count(), CurrentQuizSessionPageUpdaterStopwatch.STOPWATCH_TIMEOUT_IM_MS);
+    setTimeout(() => this.count(), CurrentQuizSessionPageEditorStopwatch.STOPWATCH_TIMEOUT_IM_MS);
   }
 
 }

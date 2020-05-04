@@ -1,5 +1,6 @@
-import {QuizDetailedScoreboard, QuizScore} from "./scoreboard.js";
-import {Properties} from "./properties/properties.js";
+import {QuizDetailedScoreboard, QuizScore} from "../scoreboards/scoreboard.js";
+import {Properties} from "../properties/properties.js";
+
 
 export class IndexedDBClient {
 
@@ -69,7 +70,7 @@ export class IndexedDBClient {
   }
 
   private static defaultErrorHandler() {
-    console.error("indexedDB error");
+    throw new Error("indexedDB error");
   }
 
   private static defaultOnUpgradeNeededeHandler(event: any) {

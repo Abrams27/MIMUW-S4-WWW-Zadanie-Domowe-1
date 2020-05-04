@@ -1,5 +1,5 @@
-import {QuizJson, QuizQuestionWithAnswerJson} from '../resources/quizzesConfig.js';
-import {QuestionStatistics, QuizDetailedScoreboard, QuizScore} from "./scoreboard";
+import {QuizJson, QuizQuestionWithAnswerJson} from '../../resources/quizzesConfig.js';
+import {QuestionStatistics, QuizDetailedScoreboard, QuizScore} from "../scoreboards/scoreboard";
 
 export class TypeGuardsUtils {
 

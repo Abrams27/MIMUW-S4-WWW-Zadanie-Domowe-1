@@ -1,5 +1,5 @@
-import {QuizJson, QuizQuestionWithAnswerJson, quizzesArray} from "../resources/quizzesConfig.js";
-import {QuizGuard} from "./typeguards.js";
+import {QuizJson, QuizQuestionWithAnswerJson, quizzesArray} from "../../resources/quizzesConfig.js";
+import {QuizGuard} from "../typeguards/typeguards.js";
 
 export class Quizzes {
 

@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import "mocha";
 
-import {QuestionStatisticsGuard} from "../../main/typeguards";
+import {QuestionStatisticsGuard} from "../../main/typeguards/typeguards";
 
 const testValidJson: string = `{
   "isAnswerCorrectFlag": true,

@@ -8,4 +8,5 @@ export class QuizProperties {
   public static QUIZ_SCOREBOARD_NUMBER_OF_SCOREBOARD_ROWS: number = 5;
   public static QUIZ_SCOREBOARD_TABLE_ID: string = "quizzes-scoreboard-table";
   public static QUIZ_SCOREBOARD_TABLE_ELEMENT_CLASS: string = "quizzes-scoreboard-table-element";
+
 }

@@ -1,4 +1,4 @@
-import {Utils} from "./utils.js";
+import {Utils} from "../utils/utils.js";
 import {QuizEndingProperties} from "../properties/quizEndingProperties.js";
 
 

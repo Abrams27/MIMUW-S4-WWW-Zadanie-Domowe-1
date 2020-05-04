@@ -1,5 +1,6 @@
 import {Quiz, QuizQuestionWithAnswersAndTime} from "./quizzes.js";
-import {QuizDetailedScoreboard} from "./scoreboard.js";
+import {QuizDetailedScoreboard} from "../scoreboards/scoreboard.js";
+
 
 export class QuizSession {
 

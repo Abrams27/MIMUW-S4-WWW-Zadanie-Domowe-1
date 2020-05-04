@@ -1,5 +1,5 @@
-import {QuizQuestionWithAnswersAndTime} from "./quizzes.js";
-import {QuizDetailedScoreboardGuard} from "./typeguards.js";
+import {QuizQuestionWithAnswersAndTime} from "../quizzes/quizzes.js";
+import {QuizDetailedScoreboardGuard} from "../typeguards/typeguards.js";
 
 export class QuizDetailedScoreboard {
 

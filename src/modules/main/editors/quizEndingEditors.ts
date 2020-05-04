@@ -1,10 +1,9 @@
-import {QuestionStatistics, QuizDetailedScoreboard} from "../scoreboard.js";
-import {HTMLElementEditor, QuizScoreboardTableEditor} from "./documentUtils.js";
+import {QuestionStatistics, QuizDetailedScoreboard} from "../scoreboards/scoreboard.js";
+import {HTMLElementEditor, QuizScoreboardTableEditor} from "./documentEditors.js";
 import {QuizEndingProperties} from "../properties/quizEndingProperties.js";
-import {Utils} from "./utils.js";
-import doc = Mocha.reporters.doc;
+import {Utils} from "../utils/utils.js";
 
-export class QuizEndingPageUpdater {
+export class QuizEndingPageEditor {
 
   private detailedScoreboard: QuizDetailedScoreboard;
 

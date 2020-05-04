@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import "mocha";
 
-import {QuizScoreGuard} from "../../main/typeguards";
+import {QuizScoreGuard} from "../../main/typeguards/typeguards";
 
 const testValidJson: string = `{
   "score": 1

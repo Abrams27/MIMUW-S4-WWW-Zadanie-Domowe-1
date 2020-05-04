@@ -1,22 +1,26 @@
 import {Properties} from "./main/properties/properties.js";
-import {Quiz} from "./main/quizzes.js";
+import {Quiz} from "./main/quizzes/quizzes.js";
 import {Utils} from "./main/utils/utils.js";
-import {DocumentEditor} from "./main/utils/documentUtils.js";
-import {QuizSession} from "./main/quizSession.js";
-import {CurrentQuizSessionPageUpdater, CurrentQuizSessionPageUpdaterStopwatch} from "./main/utils/quizQuestionUtils.js";
+import {DocumentEditor} from "./main/editors/documentEditors.js";
+import {QuizSession} from "./main/quizzes/quizSession.js";
+import {CurrentQuizSessionPageEditor, CurrentQuizSessionPageEditorStopwatch} from "./main/editors/quizQuestionEditors.js";
 import {QuizQuestionProperties} from "./main/properties/quizQuestionProperties.js";
-import {QuizDetailedScoreboard} from "./main/scoreboard.js";
+import {QuizDetailedScoreboard} from "./main/scoreboards/scoreboard.js";
 
+
+const documentEditor: DocumentEditor = DocumentEditor.fromDocument(document);
 
 const nullableQuizJson: string | null = sessionStorage.getItem(Properties.QUIZ_SESSION_STORAGE_KEY);
 const quizJson: string = Utils.getStringOrThrowError(nullableQuizJson, "invalid session storage key");
 const quiz: Quiz = Quiz.fromJson(quizJson);
 const quizSession: QuizSession = QuizSession.startWithQuiz(quiz);
 
-const currentQuizSessionPageUpdater: CurrentQuizSessionPageUpdater = new CurrentQuizSessionPageUpdater(document, quizSession);
-const documentEditor: DocumentEditor = DocumentEditor.fromDocument(document);
+const currentQuizSessionPageUpdater: CurrentQuizSessionPageEditor = new CurrentQuizSessionPageEditor(document, quizSession);
 
-CurrentQuizSessionPageUpdaterStopwatch.forUpdaterAndStart(currentQuizSessionPageUpdater);
+CurrentQuizSessionPageEditorStopwatch.forUpdaterAndStart(currentQuizSessionPageUpdater);
+
+updateButtonsVisibilityIfNeededAndUpdatePage();
+
 
 const answerInput: HTMLInputElement = <HTMLInputElement>documentEditor.getElement(QuizQuestionProperties.QUIZ_QUESTION_ANSWER_INPUT_ID);
 answerInput.addEventListener(Properties.INPUT_EVENT_TYPE, answerInputListener);
@@ -33,8 +37,6 @@ navigationStopButton.addEventListener(Properties.CLICK_EVENT_TYPE, navigationSto
 
 const navigationNextButton: HTMLButtonElement = <HTMLButtonElement>documentEditor.getElement(QuizQuestionProperties.QUIZ_QUESTION_NAVIGATION_NEXT_BUTTON_ID);
 navigationNextButton.addEventListener(Properties.CLICK_EVENT_TYPE, navigationNextButtonClickListener);
-
-updateButtonsVisibilityIfNeededAndUpdatePage();
 
 
 function answerInputListener(event: any) {

@@ -80,6 +80,10 @@ export class QuizScore {
     return this.score;
   }
 
+  public static copyOf(quizScore: QuizScore): QuizScore {
+    return new QuizScore(quizScore.score);
+  }
+
   public compare(quizScore: QuizScore): number {
     if (this.score < quizScore.score) {
       return -1;

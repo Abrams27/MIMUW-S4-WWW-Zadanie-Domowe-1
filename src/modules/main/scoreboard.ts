@@ -34,10 +34,10 @@ export class QuizDetailedScoreboard {
 
 export class QuizScore {
 
-  private result: number;
+  private score: number;
 
-  public constructor(result: number) {
-    this.result = result;
+  public constructor(score: number) {
+    this.score = score;
   }
 
 }
